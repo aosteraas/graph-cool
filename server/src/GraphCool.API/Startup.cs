@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using GraphQL;
 using GraphQL.Http;
+using GraphCool.API.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GraphCool.API
 {
@@ -21,6 +23,8 @@ namespace GraphCool.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CoolContext>(opts => opts.UseSqlite("Data Source=Data\\graphcool.db"));
+
             services.AddControllers();
             services.AddHttpContextAccessor();
 
