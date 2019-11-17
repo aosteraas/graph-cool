@@ -7,5 +7,7 @@ namespace GraphCool.API.Interfaces
     public interface IPersonService
     {
         Task<Person> GetAsync(int personId);
+        Task<List<Person>> GetAllAsync();
+        Task<Person> CreateAsync(Person person);
     }
 }
