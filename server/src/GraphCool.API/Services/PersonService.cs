@@ -16,6 +16,23 @@ namespace GraphCool.API.Services
             _context = context;
         }
 
+        public async Task<Person> CreateAsync(Person person)
+        {
+            var p = new Person
+            {
+                Name = person.Name,
+                BirthDate = person.BirthDate
+            };
+            await _context.AddAsync(p);
+            await _context.SaveChangesAsync();
+            return p;
+        }
+
+        public async Task<List<Person>> GetAllAsync() =>
+            await _context
+                .People
+                .ToListAsync();
+
         public async Task<Person> GetAsync(int personId) =>
             await _context
                 .People

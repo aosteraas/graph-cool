@@ -40,11 +40,25 @@ namespace GraphCool.API
 
             services.AddSingleton<GraphQL.IDocumentExecuter, GraphQL.DocumentExecuter>();
             services.AddSingleton<GraphQL.Http.IDocumentWriter, GraphQL.Http.DocumentWriter>();
-            services.AddGraphQL(_ =>
-            {
-                _.EnableMetrics = true;
-                _.ExposeExceptions = true;
-            }).AddGraphTypes(ServiceLifetime.Scoped);
+            // consider making these scoped so we dont have to use so
+            // many fucking singletons
+            services.AddSingleton<PersonQuery>();
+            services.AddSingleton<PersonMutation>();
+            services.AddSingleton<PersonType>();
+            services.AddSingleton<PersonInputType>();
+            // services.AddSingleton<Person>();
+            services.AddScoped<IPersonService, PersonService>();
+
+            services.AddSingleton<GraphQL.Types.ISchema, PersonSchema>();
+
+            services
+                .AddGraphQL(_ =>
+                {
+                    _.EnableMetrics = true;
+                    _.ExposeExceptions = true;
+                })
+                .AddGraphTypes(ServiceLifetime.Scoped);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
