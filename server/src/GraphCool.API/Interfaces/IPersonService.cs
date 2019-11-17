@@ -6,6 +6,6 @@ namespace GraphCool.API.Interfaces
 {
     public interface IPersonService
     {
-        Task<IList<Person>> GetAsync(int personId);
+        Task<Person> GetAsync(int personId);
     }
 }
