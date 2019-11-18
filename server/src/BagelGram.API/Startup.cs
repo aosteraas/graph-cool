@@ -21,6 +21,7 @@ using BagelGram.API.Query.Mutations;
 using BagelGram.API.Query.Types;
 using BagelGram.API.Query.Schemas;
 using BagelGram.API.Query.Inputs;
+using GraphQL;
 
 namespace BagelGram.API
 {
@@ -40,12 +41,13 @@ namespace BagelGram.API
             {
                 opts.AllowSynchronousIO = true;
             });
+
             services.AddDbContext<BagelContext>(opts => opts.UseSqlite("Data Source=../BagelGram.Data/Data/BagelGram.db"));
 
             services.AddControllers();
             services.AddHttpContextAccessor();
             services.AddSingleton<ContextServiceLocator>();
-            services.AddSingleton<GraphQL.IDocumentExecuter, GraphQL.DocumentExecuter>();
+            services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
             services.AddSingleton<IDocumentWriter, DocumentWriter>();
             // I don't like the ramifications of using singletons in DI but there doesn't seem
             // to be any feasible alternative.
