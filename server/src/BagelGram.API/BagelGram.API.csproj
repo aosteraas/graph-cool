@@ -20,8 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Incldue="..\BagelGram.Data\BagelGram.Data.csproj" />
-    <ProjectReference Incldue="..\BagelGram.Core\BagelGram.Core.csproj" />
+    <ProjectReference Include="..\BagelGram.Core\BagelGram.Core.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\BagelGram.Data\BagelGram.Data.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>

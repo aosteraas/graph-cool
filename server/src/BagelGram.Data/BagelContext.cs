@@ -1,7 +1,6 @@
-using BagelGram.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BagelGram.API.Data
+namespace BagelGram.Data
 {
     public class BagelContext : DbContext
     {

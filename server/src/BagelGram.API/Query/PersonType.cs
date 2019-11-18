@@ -1,4 +1,3 @@
-using BagelGram.API.Models;
 using GraphQL.Types;
 
 namespace BagelGram.API.Query
