@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,9 @@
 		94A2645423832E6900B87360 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94A2645223832E6900B87360 /* LaunchScreen.storyboard */; };
 		94A2645F23832E6900B87360 /* BagelGramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A2645E23832E6900B87360 /* BagelGramTests.swift */; };
 		94A2646A23832E6900B87360 /* BagelGramUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A2646923832E6900B87360 /* BagelGramUITests.swift */; };
+		94A26479238331DF00B87360 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 94A26478238331DF00B87360 /* Apollo */; };
+		94A2647B238331DF00B87360 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 94A2647A238331DF00B87360 /* ApolloWebSocket */; };
+		94A2647D2383325A00B87360 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A2647C2383325A00B87360 /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,7 @@
 		94A2646523832E6900B87360 /* BagelGramUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BagelGramUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		94A2646923832E6900B87360 /* BagelGramUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BagelGramUITests.swift; sourceTree = "<group>"; };
 		94A2646B23832E6900B87360 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94A2647C2383325A00B87360 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94A26479238331DF00B87360 /* Apollo in Frameworks */,
+				94A2647B238331DF00B87360 /* ApolloWebSocket in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +115,7 @@
 				94A2645523832E6900B87360 /* Info.plist */,
 				94A2644823832E6500B87360 /* BagelGram.xcdatamodeld */,
 				94A2644F23832E6900B87360 /* Preview Content */,
+				94A2647C2383325A00B87360 /* Network.swift */,
 			);
 			path = BagelGram;
 			sourceTree = "<group>";
@@ -155,6 +162,10 @@
 			dependencies = (
 			);
 			name = BagelGram;
+			packageProductDependencies = (
+				94A26478238331DF00B87360 /* Apollo */,
+				94A2647A238331DF00B87360 /* ApolloWebSocket */,
+			);
 			productName = BagelGram;
 			productReference = 94A2644123832E6500B87360 /* BagelGram.app */;
 			productType = "com.apple.product-type.application";
@@ -227,6 +238,9 @@
 				Base,
 			);
 			mainGroup = 94A2643823832E6500B87360;
+			packageReferences = (
+				94A26477238331DF00B87360 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+			);
 			productRefGroup = 94A2644223832E6500B87360 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -270,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94A2647D2383325A00B87360 /* Network.swift in Sources */,
 				94A2644523832E6500B87360 /* AppDelegate.swift in Sources */,
 				94A2644723832E6500B87360 /* SceneDelegate.swift in Sources */,
 				94A2644C23832E6500B87360 /* ContentView.swift in Sources */,
@@ -592,6 +607,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		94A26477238331DF00B87360 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.20.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		94A26478238331DF00B87360 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94A26477238331DF00B87360 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		94A2647A238331DF00B87360 /* ApolloWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94A26477238331DF00B87360 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloWebSocket;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		94A2644823832E6500B87360 /* BagelGram.xcdatamodeld */ = {
