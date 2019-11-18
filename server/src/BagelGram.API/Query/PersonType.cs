@@ -1,7 +1,7 @@
-using GraphCool.API.Models;
+using BagelGram.API.Models;
 using GraphQL.Types;
 
-namespace GraphCool.API.Query
+namespace BagelGram.API.Query
 {
     public class PersonType : ObjectGraphType<Person>
     {

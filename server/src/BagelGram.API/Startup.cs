@@ -1,20 +1,20 @@
+using BagelGram.API.Data;
+using BagelGram.API.Interfaces;
+using BagelGram.API.Query;
+using BagelGram.API.Services;
+using GraphQL.Http;
+using GraphQL.Server;
+using GraphQL.Server.Ui.Playground;
+using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using GraphQL.Server;
-using GraphQL.Server.Ui.Playground;
-using GraphQL.Http;
-using GraphCool.API.Data;
-using Microsoft.EntityFrameworkCore;
-using GraphCool.API.Services;
-using GraphCool.API.Interfaces;
-using GraphCool.API.Query;
-using GraphQL.Types;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 
-namespace GraphCool.API
+namespace BagelGram.API
 {
     public class Startup
     {
@@ -32,7 +32,7 @@ namespace GraphCool.API
             {
                 opts.AllowSynchronousIO = true;
             });
-            services.AddDbContext<CoolContext>(opts => opts.UseSqlite("Data Source=./Data/graphcool.db"));
+            services.AddDbContext<BagelContext>(opts => opts.UseSqlite("Data Source=./Data/BagelGram.db"));
 
             services.AddControllers();
             services.AddHttpContextAccessor();

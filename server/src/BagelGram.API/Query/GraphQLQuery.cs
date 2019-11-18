@@ -1,6 +1,6 @@
 using Newtonsoft.Json.Linq;
 
-namespace GraphCool.API.Query
+namespace BagelGram.API.Query
 {
     public class GraphQLQuery
     {

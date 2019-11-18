@@ -3,7 +3,7 @@ using GraphQL;
 using System;
 using GraphQL.Utilities;
 
-namespace GraphCool.API.Query
+namespace BagelGram.API.Query
 {
     public class PersonSchema : Schema
     {

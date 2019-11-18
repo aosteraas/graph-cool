@@ -1,6 +1,6 @@
 using GraphQL.Types;
 
-namespace GraphCool.API.Query
+namespace BagelGram.API.Query
 {
     public class PersonInputType : InputObjectGraphType
     {

@@ -19,4 +19,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Incldue="..\BagelGram.Data\BagelGram.Data.csproj" />
+    <ProjectReference Incldue="..\BagelGram.Core\BagelGram.Core.csproj" />
+  </ItemGroup>
+
 </Project>
