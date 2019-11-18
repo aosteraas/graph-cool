@@ -1,6 +1,5 @@
 using BagelGram.API.Query.Types;
 using BagelGram.API.Services;
-using BagelGram.Core.Interfaces;
 using GraphQL.Types;
 
 namespace BagelGram.API.Query.Queries
