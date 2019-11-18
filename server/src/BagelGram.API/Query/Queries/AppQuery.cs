@@ -20,10 +20,38 @@ namespace BagelGram.API.Query.Queries
                 }
             );
 
-            FieldAsync<UserType>(
+            FieldAsync<ListGraphType<UserType>>(
                 name: "Users",
                 description: "All Users of BagelGram",
                 resolve: async context => await locator.UserRepository.GetUsersAsync()
+            );
+
+            FieldAsync<ListGraphType<ImageType>>(
+                name: "Images",
+                description: "All Images",
+                resolve: async context => await locator.ImageRepository.GetImagesAsync()
+            );
+
+            FieldAsync<ImageType>(
+                name: "Image",
+                description: "All images for user",
+                resolve: async context =>
+                {
+                    var id = context.GetArgument<int>("id");
+                    var image = await locator.ImageRepository.GetImageAsync(id);
+                    return image;
+                }
+            );
+
+            FieldAsync<ListGraphType<ImageType>>(
+                name: "imagesForUser",
+                description: "All Images for a User",
+                resolve: async context =>
+                {
+                    var userId = context.GetArgument<int>("userId");
+                    var images = await locator.ImageRepository.GetUserImages(userId);
+                    return images;
+                }
             );
         }
 
