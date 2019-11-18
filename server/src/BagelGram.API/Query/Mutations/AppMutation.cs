@@ -1,14 +1,15 @@
 using BagelGram.API.Query.Inputs;
 using BagelGram.API.Query.Types;
+using BagelGram.API.Services;
 using BagelGram.Core.Interfaces;
 using BagelGram.Core.Models;
 using GraphQL.Types;
 
 namespace BagelGram.API.Query.Mutations
 {
-    public class UserMutation : ObjectGraphType
+    public class AppMutation : ObjectGraphType
     {
-        public UserMutation(IUserRepository userRepository)
+        public AppMutation(ContextServiceLocator locator)
         {
             FieldAsync<UserType>(
                 "createUser",
@@ -18,7 +19,7 @@ namespace BagelGram.API.Query.Mutations
                 resolve: async context =>
                 {
                     var user = context.GetArgument<User>("user");
-                    var newUser = await userRepository.CreateUserAsync(user);
+                    var newUser = await locator.UserRepository.CreateUserAsync(user);
                     return user;
                 }
             );

@@ -1,6 +1,5 @@
 using BagelGram.API.Query.Types;
 using BagelGram.API.Services;
-using BagelGram.Core.Interfaces;
 using GraphQL.Types;
 
 namespace BagelGram.API.Query.Queries
@@ -9,24 +8,11 @@ namespace BagelGram.API.Query.Queries
     {
         public AppQuery(ContextServiceLocator locator)
         {
-            FieldAsync<UserType>(
-                name: "User",
-                description: "A User of BagelGram",
-                arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "Id", Description = "The User's Id" }),
-                resolve: async context =>
-                {
-                    var id = context.GetArgument<int>("id");
-                    return await locator.UserRepository.GetUserAsync(id);
-                }
-            );
+            Name = "Query";
 
-            FieldAsync<UserType>(
-                name: "Users",
-                description: "All Users of BagelGram",
-                resolve: async context => await locator.UserRepository.GetUsersAsync()
-            );
+            Field<UserQuery>("users", resolve: context => new { });
+            Field<ImageQuery>("images", resolve: context => new { });
+            Field<CommentQuery>("comments", resolve: context => new { });
         }
-
     }
-
 }
