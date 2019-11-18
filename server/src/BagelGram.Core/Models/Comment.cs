@@ -10,6 +10,7 @@ namespace BagelGram.Core.Models
         public int UserId { get; set; }
         public int ImageId { get; set; }
         public string Text { get; set; }
+        public string Source { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; set; }
