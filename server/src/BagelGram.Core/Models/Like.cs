@@ -15,6 +15,5 @@ namespace BagelGram.Core.Models
 
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; set; }
-
     }
 }
