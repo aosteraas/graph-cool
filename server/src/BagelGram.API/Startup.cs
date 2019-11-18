@@ -47,7 +47,9 @@ namespace BagelGram.API
             services.AddSingleton<PersonType>();
             services.AddSingleton<PersonInputType>();
             // services.AddSingleton<Person>();
-            services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             services.AddSingleton<GraphQL.Types.ISchema, PersonSchema>();
 

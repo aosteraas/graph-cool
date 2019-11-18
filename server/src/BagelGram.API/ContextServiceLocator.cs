@@ -1,4 +1,3 @@
-using BagelGram.API.Interfaces;
 using GraphQL.Utilities;
 using Microsoft.AspNetCore.Http;
 
