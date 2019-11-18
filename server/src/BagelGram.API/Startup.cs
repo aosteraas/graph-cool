@@ -1,6 +1,5 @@
-using BagelGram.API.Data;
-using BagelGram.API.Interfaces;
 using BagelGram.API.Query;
+using BagelGram.Data;
 using BagelGram.API.Services;
 using GraphQL.Http;
 using GraphQL.Server;
@@ -13,6 +12,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using BagelGram.Core.Interfaces;
+using BagelGram.Data.Repositories;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using BagelGram.API.Query.Queries;
+using BagelGram.API.Query.Mutations;
+using BagelGram.API.Query.Types;
+using BagelGram.API.Query.Schemas;
+using BagelGram.API.Query.Inputs;
 
 namespace BagelGram.API
 {
@@ -32,26 +40,28 @@ namespace BagelGram.API
             {
                 opts.AllowSynchronousIO = true;
             });
-            services.AddDbContext<BagelContext>(opts => opts.UseSqlite("Data Source=./Data/BagelGram.db"));
+            services.AddDbContext<BagelContext>(opts => opts.UseSqlite("Data Source=../BagelGram.Data/Data/BagelGram.db"));
 
             services.AddControllers();
             services.AddHttpContextAccessor();
             services.AddSingleton<ContextServiceLocator>();
-
             services.AddSingleton<GraphQL.IDocumentExecuter, GraphQL.DocumentExecuter>();
             services.AddSingleton<GraphQL.Http.IDocumentWriter, GraphQL.Http.DocumentWriter>();
             // consider making these scoped so we dont have to use so
             // many fucking singletons
-            services.AddSingleton<PersonQuery>();
-            services.AddSingleton<PersonMutation>();
-            services.AddSingleton<PersonType>();
-            services.AddSingleton<PersonInputType>();
-            // services.AddSingleton<Person>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IImageRepository, ImageRepository>();
-            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddSingleton<AppQuery>();
+            services.AddSingleton<AppMutation>();
 
-            services.AddSingleton<GraphQL.Types.ISchema, PersonSchema>();
+            services.AddSingleton<UserType>();
+            services.AddSingleton<UserInputType>();
+            services.AddSingleton<ImageType>();
+            services.AddSingleton<CommentType>();
+
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IImageRepository, ImageRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
+
+            services.AddSingleton<GraphQL.Types.ISchema, AppSchema>();
 
             services
                 .AddGraphQL(_ =>
@@ -70,6 +80,12 @@ namespace BagelGram.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
+                RequestPath = "/uploads"
+            });
 
             app.UseHttpsRedirection();
 
