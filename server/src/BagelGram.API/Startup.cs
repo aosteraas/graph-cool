@@ -47,9 +47,13 @@ namespace BagelGram.API
             services.AddSingleton<ContextServiceLocator>();
             services.AddSingleton<GraphQL.IDocumentExecuter, GraphQL.DocumentExecuter>();
             services.AddSingleton<GraphQL.Http.IDocumentWriter, GraphQL.Http.DocumentWriter>();
-            // consider making these scoped so we dont have to use so
-            // many fucking singletons
+            // I don't like the ramifications of using singletons in DI but there doesn't seem
+            // to be any feasible alternative.
             services.AddSingleton<AppQuery>();
+            services.AddSingleton<UserQuery>();
+            services.AddSingleton<CommentQuery>();
+            services.AddSingleton<ImageQuery>();
+
             services.AddSingleton<AppMutation>();
 
             services.AddSingleton<UserType>();
