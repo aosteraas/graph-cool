@@ -7,6 +7,11 @@ namespace BagelGram.Data
     {
         public BagelContext() { }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Seed();
+        }
+
         public BagelContext(DbContextOptions<BagelContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
