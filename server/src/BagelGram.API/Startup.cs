@@ -1,9 +1,7 @@
-using BagelGram.API.Query;
 using BagelGram.Data;
 using BagelGram.API.Services;
 using GraphQL.Http;
 using GraphQL.Server;
-using GraphQL.Server.Ui.Playground;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
