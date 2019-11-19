@@ -9,6 +9,7 @@ namespace BagelGram.API.Query.Queries
         public ImageQuery(ContextServiceLocator locator)
         {
             Name = "Images";
+
             FieldAsync<ListGraphType<ImageType>>(
                 name: "Images",
                 description: "All Images",

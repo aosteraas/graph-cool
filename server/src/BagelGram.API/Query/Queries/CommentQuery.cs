@@ -9,6 +9,7 @@ namespace BagelGram.API.Query.Queries
         public CommentQuery(ContextServiceLocator locator)
         {
             Name = "Comments";
+
             FieldAsync<ListGraphType<CommentType>>(
                 name: "commentsForImage",
                 description: "All comments on a given image",

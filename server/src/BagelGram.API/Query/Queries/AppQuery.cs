@@ -1,12 +1,10 @@
-using BagelGram.API.Query.Types;
-using BagelGram.API.Services;
 using GraphQL.Types;
 
 namespace BagelGram.API.Query.Queries
 {
     public class AppQuery : ObjectGraphType
     {
-        public AppQuery(ContextServiceLocator locator)
+        public AppQuery()
         {
             Name = "Query";
 

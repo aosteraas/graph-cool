@@ -9,11 +9,17 @@ namespace BagelGram.API.Query.Types
         {
             Name = "Comment";
 
-            Field(x => x.Id, type: typeof(IdGraphType)).Description("The Comment ID");
-            Field(x => x.Text).Description("The text of the comment");
+            Field(x => x.Id, type: typeof(IdGraphType))
+                .Description("The Comment ID");
 
-            Field(x => x.Image, type: typeof(ImageType)).Description("The image the comment belongs to");
-            Field(x => x.User, type: typeof(UserType)).Description("The User who wrote the comment");
+            Field(x => x.Text)
+                .Description("The text of the comment");
+
+            Field(x => x.Image, type: typeof(ImageType))
+                .Description("The image the comment belongs to");
+
+            Field(x => x.User, type: typeof(UserType))
+                .Description("The User who wrote the comment");
         }
     }
 }
