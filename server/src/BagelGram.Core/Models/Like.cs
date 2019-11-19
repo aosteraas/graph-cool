@@ -9,6 +9,7 @@ namespace BagelGram.Core.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public int ImageId { get; set; }
+        public DateTime Date { get; set; }
 
         [ForeignKey(nameof(ImageId))]
         public virtual Image Image { get; set; }
