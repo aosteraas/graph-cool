@@ -91,7 +91,7 @@ namespace BagelGram.API
                 RequestPath = "/uploads"
             });
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseGraphQL<ISchema>();
 
