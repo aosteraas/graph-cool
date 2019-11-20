@@ -1,6 +1,6 @@
 import React from 'react';
 import { useGetImagesQuery } from '../generated/graphql';
-import { ImageColumn, ImageItem, SquareImage } from '../styles/ImageStyles';
+import { ImageColumn, ImageItem, SquareImage, Like, Comment } from '../styles/ImageStyles';
 
 export const Images = () => {
   const { data, error, loading } = useGetImagesQuery();
@@ -10,6 +10,8 @@ export const Images = () => {
       {images.map((image, idx) => (
         <ImageItem key={idx}>
           <SquareImage src={`http://localhost:5000${image!.source}`} />
+          <Like />
+          <Comment />
         </ImageItem>
       ))}
     </ImageColumn>
