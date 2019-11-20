@@ -4,11 +4,12 @@ using GraphQL.Types;
 
 namespace BagelGram.API.Query.Queries
 {
-    public class AppQuery : ObjectGraphType
+    public class BagelQuery : ObjectGraphType<object>
     {
-        public AppQuery(ContextServiceLocator locator)
+        public BagelQuery(ContextServiceLocator locator)
         {
             Name = "Query";
+
             FieldAsync<UserType>(
                 name: "getUser",
                 description: "A User of BagelGram",

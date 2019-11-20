@@ -10,7 +10,7 @@ namespace BagelGram.API.Query.Schemas
     {
         public AppSchema(IServiceProvider provider) : base(provider)
         {
-            Query = provider.GetRequiredService<AppQuery>();
+            Query = provider.GetRequiredService<BagelQuery>();
             Mutation = provider.GetRequiredService<AppMutation>();
         }
     }

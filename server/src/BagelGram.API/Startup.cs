@@ -49,7 +49,7 @@ namespace BagelGram.API
             services.AddSingleton<IDocumentWriter, DocumentWriter>();
             // I don't like the ramifications of using singletons in DI but there doesn't seem
             // to be any feasible alternative.
-            services.AddSingleton<AppQuery>();
+            services.AddSingleton<BagelQuery>();
             services.AddSingleton<UserQuery>();
             services.AddSingleton<CommentQuery>();
             services.AddSingleton<ImageQuery>();
