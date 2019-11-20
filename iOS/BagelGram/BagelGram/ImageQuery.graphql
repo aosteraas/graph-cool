@@ -1,0 +1,6 @@
+query GetImages {
+  getImages {
+    id
+    source
+  }
+}
