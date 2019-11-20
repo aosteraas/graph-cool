@@ -8,10 +8,11 @@
 
 import UIKit
 import CoreData
-
+import Apollo
+let apollo = ApolloClient(url: URL(string: "http://localhost:5000/graphql")!)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

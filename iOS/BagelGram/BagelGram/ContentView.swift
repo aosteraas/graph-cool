@@ -7,8 +7,33 @@
 //
 
 import SwiftUI
+import Apollo
+import Network
 
 struct ContentView: View {
+    let n = Network()
+    func doStuff() {
+        apollo.fetch(query: GetImagesQuery()) { result in
+            switch result {
+            case.success(let result):
+                if let source = result.data?.getImages?.first. {
+                    print(source)
+                }
+            }
+            
+        }
+    }
+    
+    
+//    func GetShit() {
+//
+//        .fetch(query: GetImagesQuery()) {
+//            result in
+//          guard let data = try? result.get().data else { return }
+//          print(data.hero?.name) // Luke Skywalker
+//        }
+//    }
+    
     var body: some View {
         Text("Hello, World!")
     }
