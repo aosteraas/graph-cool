@@ -1,36 +1,22 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
-import './App.css';
+import { Header } from './Header';
+import { Images } from './Images';
 
-const IMAGES = gql`
-  {
-    images {
-      images {
-        id
-        source
-      }
+const QUERY_GET_IMAGES = gql`
+  query GetImages {
+    getImages {
+      id
+      source
     }
   }
 `;
 
 const App: React.FC = () => {
-  const { loading, data, error } = useQuery(IMAGES);
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Images />
     </div>
   );
 };
