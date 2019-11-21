@@ -12,6 +12,7 @@ import Network
 
 struct ContentView: View {
     let controller = ImagesContoller()
+//    let data = controller.something
     var body: some View {
         Text("Hello, World!")
     }

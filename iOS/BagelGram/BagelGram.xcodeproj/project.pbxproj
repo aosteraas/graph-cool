@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4D2C16E92384BC6E005C4F4A /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D2C16E82384BC6E005C4F4A /* logo.png */; };
+		4DF4C12B238659AC000FA081 /* ImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4C12A238659AC000FA081 /* ImagesView.swift */; };
+		4DF4C12D23865D1F000FA081 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4C12C23865D1F000FA081 /* Server.swift */; };
+		4DF4C13123865DE6000FA081 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4C13023865DE6000FA081 /* HomeViewController.swift */; };
+		4DF4C13323865E30000FA081 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4C13223865E30000FA081 /* HomeViewModel.swift */; };
 		948BF7C72385D78C00F1F048 /* ImagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948BF7C62385D78C00F1F048 /* ImagesController.swift */; };
-		948BF7CA2385DE7600F1F048 /* ImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948BF7C92385DE7600F1F048 /* ImagesView.swift */; };
 		94A2644523832E6500B87360 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A2644423832E6500B87360 /* AppDelegate.swift */; };
 		94A2644723832E6500B87360 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A2644623832E6500B87360 /* SceneDelegate.swift */; };
 		94A2644A23832E6500B87360 /* BagelGram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94A2644823832E6500B87360 /* BagelGram.xcdatamodeld */; };
@@ -46,8 +49,11 @@
 
 /* Begin PBXFileReference section */
 		4D2C16E82384BC6E005C4F4A /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../../../assets/logo.png; sourceTree = "<group>"; };
+		4DF4C12A238659AC000FA081 /* ImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesView.swift; sourceTree = "<group>"; };
+		4DF4C12C23865D1F000FA081 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		4DF4C13023865DE6000FA081 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4DF4C13223865E30000FA081 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		948BF7C62385D78C00F1F048 /* ImagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesController.swift; sourceTree = "<group>"; };
-		948BF7C92385DE7600F1F048 /* ImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesView.swift; sourceTree = "<group>"; };
 		94A2644123832E6500B87360 /* BagelGram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BagelGram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94A2644423832E6500B87360 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94A2644623832E6500B87360 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +102,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4DF4C12E23865DD8000FA081 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				4DF4C12F23865DDD000FA081 /* Home */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		4DF4C12F23865DDD000FA081 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4DF4C13023865DE6000FA081 /* HomeViewController.swift */,
+				4DF4C13223865E30000FA081 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		948BF7C82385DA1200F1F048 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,13 +150,14 @@
 		94A2644323832E6500B87360 /* BagelGram */ = {
 			isa = PBXGroup;
 			children = (
+				4DF4C12E23865DD8000FA081 /* Screens */,
 				948BF7C82385DA1200F1F048 /* Controller */,
 				94B1D8F12385522F005AECEB /* API.swift */,
+				4DF4C12C23865D1F000FA081 /* Server.swift */,
 				94D22CD423855046000C55FB /* graphql.schema.json */,
 				94A2644423832E6500B87360 /* AppDelegate.swift */,
 				94A2644623832E6500B87360 /* SceneDelegate.swift */,
 				94A2644B23832E6500B87360 /* ContentView.swift */,
-				948BF7C92385DE7600F1F048 /* ImagesView.swift */,
 				94A2644D23832E6900B87360 /* Assets.xcassets */,
 				4D2C16E82384BC6E005C4F4A /* logo.png */,
 				94A2645223832E6900B87360 /* LaunchScreen.storyboard */,
@@ -142,6 +166,7 @@
 				94A2644F23832E6900B87360 /* Preview Content */,
 				94A2647C2383325A00B87360 /* Network.swift */,
 				94B1D8EE238550DC005AECEB /* ImageQuery.graphql */,
+				4DF4C12A238659AC000FA081 /* ImagesView.swift */,
 			);
 			path = BagelGram;
 			sourceTree = "<group>";
@@ -335,12 +360,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				94A2647D2383325A00B87360 /* Network.swift in Sources */,
+				4DF4C13323865E30000FA081 /* HomeViewModel.swift in Sources */,
 				948BF7C72385D78C00F1F048 /* ImagesController.swift in Sources */,
 				94A2644523832E6500B87360 /* AppDelegate.swift in Sources */,
 				94A2644723832E6500B87360 /* SceneDelegate.swift in Sources */,
-				948BF7CA2385DE7600F1F048 /* ImagesView.swift in Sources */,
+				4DF4C12B238659AC000FA081 /* ImagesView.swift in Sources */,
+				4DF4C13123865DE6000FA081 /* HomeViewController.swift in Sources */,
 				94A2644C23832E6500B87360 /* ContentView.swift in Sources */,
 				94B1D8F22385522F005AECEB /* API.swift in Sources */,
+				4DF4C12D23865D1F000FA081 /* Server.swift in Sources */,
 				94A2644A23832E6500B87360 /* BagelGram.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

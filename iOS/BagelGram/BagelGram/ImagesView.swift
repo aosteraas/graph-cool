@@ -8,14 +8,24 @@
 
 import SwiftUI
 
-struct ImagesView: View {
+
+struct PageView<Page: View>: View {
+    var viewControllers: [UIHostingController<Page>]
+
+
+    init(_ views: [Page]) {
+        self.viewControllers = views.map { UIHostingController(rootView: $0) }
+    }
+
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        PageViewController(controllers: viewControllers)
     }
 }
 
-struct ImagesView_Previews: PreviewProvider {
+
+struct PageView_Preview: PreviewProvider {
     static var previews: some View {
-        ImagesView()
+        PageView(features.map)
     }
 }

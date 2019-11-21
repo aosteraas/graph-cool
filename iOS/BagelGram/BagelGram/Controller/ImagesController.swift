@@ -6,46 +6,40 @@
 //  Copyright © 2019 Aaron Osteraas. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 import UIKit
 import Apollo
 
 
-class ImagesContoller : UIViewController
-{
-    let apollo: ApolloClient = {
-        let configuration = URLSessionConfiguration.default
-        
-        let url = URL(string: "http://localhost:5000/graphql")!
-
-        return ApolloClient(
-            networkTransport: HTTPNetworkTransport(
-                url: url
-                
-            )
-        )
-    }()
+struct PageViewController : UIViewControllerRepresentable {
+    var controllers: [UIViewController]
+    @State public var imageData: GetImagesQuery.Data?
     
-//    func doThing()->[GetImage] {
-//        apollo.fetch(query: GetImagesQuery()) { result in
-//            guard let data = try? result.get().data else {return}
-//            print(data)
-//            return data
-//        }
-//    }
-    override func viewDidLoad() {
+    func makeUIViewController(context: Context) -> UIPageViewController {
+        let pageViewController = UIPageViewController(
+           transitionStyle: .scroll,
+           navigationOrientation: .horizontal)
+
+        return pageViewController
+    }
+    
+    func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
+        pageViewController.setViewControllers(
+            [controllers[0]], direction: .forward, animated: true)
+    }
+    
+    func fetchData() {
         apollo.fetch(query: GetImagesQuery()) { result in
-            guard let data = try? result.get().data else {return}
-            print(data)
-            
-            
+            guard let data = try? result.get().data else { return }
+            self.imageData = data
             switch result {
                 case.success(let result):
                     print(result)
                 case.failure(let error):
                     print(error)
-            
+
             }
         }
     }
+
 }

@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import Apollo
-let apollo = ApolloClient(url: URL(string: "http://localhost:5000/graphql")!)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
