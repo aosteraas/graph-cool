@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController : UIViewController {
     
     let server = Server()
     
@@ -19,8 +19,8 @@ class HomeViewController: UIViewController {
         
         let vm = HomeViewModel()
         
-        vm.images.bind {
-            tableView.reload withasd
-        }
+//        vm.images.bind {
+//            tableView.reload withasd
+//        }
     }
 }

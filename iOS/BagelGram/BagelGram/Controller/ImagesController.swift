@@ -29,17 +29,17 @@ struct PageViewController : UIViewControllerRepresentable {
     }
     
     func fetchData() {
-        apollo.fetch(query: GetImagesQuery()) { result in
-            guard let data = try? result.get().data else { return }
-            self.imageData = data
-            switch result {
-                case.success(let result):
-                    print(result)
-                case.failure(let error):
-                    print(error)
-
-            }
-        }
+//        apollo.fetch(query: GetImagesQuery()) { result in
+//            guard let data = try? result.get().data else { return }
+//            self.imageData = data
+//            switch result {
+//                case.success(let result):
+//                    print(result)
+//                case.failure(let error):
+//                    print(error)
+//
+//            }
+//        }
     }
 
 }

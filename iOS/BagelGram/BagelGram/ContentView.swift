@@ -11,11 +11,52 @@ import Apollo
 import Network
 
 struct ContentView: View {
-    let controller = ImagesContoller()
+    private let bagelPink = UIColor(red: 0.95805620825129523, green: 0.28210045499878755, blue: 1, alpha: 1)
+    
+    init() {
+        let navAppearance = UINavigationBar.appearance()
+        navAppearance.barTintColor = bagelPink
+        navAppearance.titleTextAttributes = [
+            .font: UIFont(name: "Chalkboard SE", size: 20)!,
+            .foregroundColor: UIColor.white
+        ]
+    }
+    
+     func doThing() {
+        
+//           apollo.fetch(query: GetImagesQuery()) { result in
+//               switch result {
+//               case .success(let graphQLResult):
+//                let things:[GetImagesQuery.Data.GetImage?]? = graphQLResult.data?.getImages
+//                   print(things)
+//               case .failure(let error):
+//                 NSLog("Error while fetching query: \(error.localizedDescription)")
+//               }
+//               guard let data = try? result.get().data else {return}
+//               print(data)
+//               
+//           }
+       }
+    
 //    let data = controller.something
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            
+//            HStack {
+                Text("Hello, World!")
+                    .font(.title)
+                
+//            }
+            
+            .navigationBarTitle("BagelGram", displayMode: .inline)
+            
+        
+        }
+        
+        //.edgesIgnoringSafeArea(.top)
+        
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
