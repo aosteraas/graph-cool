@@ -1,12 +1,20 @@
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro';
 
 export const ImageColumn = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
   margin: 0 auto;
 `;
+
+export const ImageItem = styled.article`
+  border: 2px solid #dfdfdf;
+  border-radius: 0.25rem;
+  padding: 0.625rem;
+  margin: 0.625rem 0;
+  background-color: #f8f8ff;
+`;
+
 export const SquareImage = styled.img`
   width: 100%;
   height: 100%;
@@ -14,9 +22,9 @@ export const SquareImage = styled.img`
   max-height: 500px;
   object-fit: cover;
 `;
-export const ImageItem = styled.article``;
 
-export const ImageMeta = styled.section`
+export const ImageActions = styled.section`
   display: flex;
   flex-direction: row;
+  font-size: 1.5rem;
 `;

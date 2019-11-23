@@ -1,17 +1,9 @@
-import React from "react";
-import { useGetImagesQuery } from "../generated/graphql";
-import {
-  ImageColumn,
-  ImageItem,
-  SquareImage,
-  ImageMeta
-} from "../styles/ImageStyles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart as fasHeart,
-  faComment
-} from "@fortawesome/free-solid-svg-icons";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import React from 'react';
+import { useGetImagesQuery } from '../generated/graphql';
+import { ImageColumn, ImageItem, SquareImage, ImageActions } from '../styles/ImageStyles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as fasHeart, faComment } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
 export const Images = () => {
   const { data, error, loading } = useGetImagesQuery();
@@ -21,11 +13,15 @@ export const Images = () => {
       {images.map((image, idx) => (
         <ImageItem key={idx}>
           <SquareImage src={`http://localhost:5000${image!.source}`} />
-          <ImageMeta>
+          <ImageActions>
             <FontAwesomeIcon icon={fasHeart} />
             <FontAwesomeIcon icon={faHeart} />
             <FontAwesomeIcon icon={faComment} />
-          </ImageMeta>
+          </ImageActions>
+          <div className="imageauthor">
+            <strong>Bagel</strong>
+            <div>The caption goes here</div>
+          </div>
         </ImageItem>
       ))}
     </ImageColumn>
