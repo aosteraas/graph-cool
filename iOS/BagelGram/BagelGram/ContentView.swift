@@ -42,19 +42,12 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             
-//            HStack {
-                Text("Hello, World!")
-                    .font(.title)
-                
-//            }
-            
+            Text("Hello, World!")
+                .font(.title)
+ 
+
             .navigationBarTitle("BagelGram", displayMode: .inline)
-            
-        
         }
-        
-        //.edgesIgnoringSafeArea(.top)
-        
     }
     
 }
