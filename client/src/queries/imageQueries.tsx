@@ -5,6 +5,8 @@ export const QUERY_GET_IMAGES = gql`
     getImages {
       id
       source
+      caption
+      uploaded
     }
   }
 `;

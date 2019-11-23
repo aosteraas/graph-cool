@@ -60,5 +60,4 @@ namespace BagelGram.Data
             return imageData.ToArray();
         }
     }
-
 }

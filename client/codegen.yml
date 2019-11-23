@@ -1,6 +1,6 @@
 overwrite: true
 schema: 'http://localhost:5000/graphql'
-documents: './src/components**/*.{ts|tsx}'
+documents: './src/queries**/*.{ts|tsx}'
 generates:
   src/generated/graphql.tsx:
     plugins:
@@ -10,5 +10,6 @@ generates:
       # - 'typescript-graphql-files-modules'
       - 'fragment-matcher'
     config:
+      withComponent: false
+      withHOC: false
       withHooks: true
-      withHoc: false
