@@ -12,11 +12,17 @@ namespace BagelGram.API.Query.Types
             Field(x => x.Id, type: typeof(IdGraphType))
                 .Description("The Image ID");
 
-            Field(x => x.Source)
-                .Description("The source url of the image");
+            Field<NonNullGraphType<StringGraphType>>(nameof(Image.Source));
 
-            Field(x => x.User, type: typeof(UserType))
-                .Description("The user who uploaded the image");
+            Field(x => x.Uploaded)
+                .Description("The date the image was uploaded");
+
+            Field(x => x.Caption)
+                .Description("The caption of the image");
+
+            Field<UserType>(nameof(Image.User));
+            Field<ListGraphType<CommentType>>(nameof(Image.Comments));
+            // TODO add likes
         }
     }
 }

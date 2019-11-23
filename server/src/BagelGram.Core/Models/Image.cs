@@ -11,6 +11,7 @@ namespace BagelGram.Core.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public string Source { get; set; }
+        public string Caption { get; set; }
         public DateTime Uploaded { get; set; }
 
         [ForeignKey(nameof(UserId))]
