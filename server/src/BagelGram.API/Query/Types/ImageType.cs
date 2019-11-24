@@ -22,7 +22,18 @@ namespace BagelGram.API.Query.Types
 
             Field<UserType>(nameof(Image.User));
             Field<ListGraphType<CommentType>>(nameof(Image.Comments));
-            // TODO add likes
+
+            Field(
+                typeof(IntGraphType),
+                "TotalLikes",
+                "Number of likes an image has",
+                null,
+                context =>
+                {
+                    var likes = context.Source.Likes.Count;
+                    return likes;
+                }
+            );
         }
     }
 }

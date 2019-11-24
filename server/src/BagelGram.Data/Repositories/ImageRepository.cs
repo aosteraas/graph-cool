@@ -36,6 +36,8 @@ namespace BagelGram.Data.Repositories
         public async Task<IList<Image>> GetImagesAsync() => await _context
             .Images
             .AsNoTracking()
+            .Include(x => x.Likes)
+            .Include(x => x.Comments)
             .ToListAsync();
 
         public async Task<IList<Image>> GetUserImages(int userId) => await _context
