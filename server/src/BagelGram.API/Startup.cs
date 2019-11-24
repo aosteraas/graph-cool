@@ -64,6 +64,7 @@ namespace BagelGram.API
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IImageRepository, ImageRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddTransient<ILikeRepository, LikeRepository>();
 
             services.AddSingleton<ISchema, AppSchema>();
 
