@@ -33,7 +33,7 @@ class ImageData: ObservableObject {
 struct ContentView: View {
     private let bagelPink = UIColor(red: 0.95805620825129523, green: 0.28210045499878755, blue: 1, alpha: 1)
     private let bagelFont = UIFont(name: "Chalkboard SE", size: 20)
-    @ObservedObject private var data = ImageData()
+    
     
     init() {
         let navAppearance = UINavigationBar.appearance()
@@ -47,21 +47,10 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             
-            VStack {
-                ForEach(data.data, id: \.id) { imageItem in
-                    VStack {
-                        Group {
-                            ImageLoadingView(url: URL(string: "http://localhost:5000\(imageItem.source)")!)
-                            Text("Bagel doing something")
-                                .font(Font.custom("Chalkboard SE", size: 20))
-                        }
-                        
-                    }
-                    
-                }
-            }
+            ExtractedView()
             .navigationBarTitle("BagelGram", displayMode: .inline)
         }
+
 
     }
 }
@@ -72,3 +61,26 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+
+struct ExtractedView: View {
+    @ObservedObject private var data = ImageData()
+    var body: some View {
+        
+        VStack(alignment: .trailing) {
+//            ScrollView(.vertical, showsIndicators: false) {
+                ForEach(data.data, id: \.id) { imageItem in
+                    VStack {
+                        Group {
+                            ImageLoadingView(url: URL(string: "http://localhost:5000\(imageItem.source)")!)
+                            Text("Bagel doing something")
+                                .font(Font.custom("Chalkboard SE", size: 20))
+                        }
+                        
+                    }
+                }
+//            }
+            
+        }
+        .offset(y: 80)
+    }
+}
