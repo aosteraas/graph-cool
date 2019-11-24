@@ -7,20 +7,30 @@
 //
 
 import UIKit
+import Apollo
 
 class HomeViewController : UIViewController {
+    let client = Server.shared.apollo
     
-    let server = Server()
+    var watcher: GraphQLQueryWatcher<GetImagesQuery>?
+    var images: [GetImagesQuery.Data.GetImage]?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        let vm = HomeViewModel()
-        
+//        let vm = HomeViewModel()
 //        vm.images.bind {
 //            tableView.reload withasd
 //        }
+    }
+    func fetchData() {
+        client.watch(query: GetImagesQuery()) { result in
+            switch result {
+            case .success(let res):
+                self.images = res.data?.getImages! as? [GetImagesQuery.Data.GetImage]
+            case .failure(let error):
+                NSLog("Error while fetching query: \(error.localizedDescription)")
+            }
+        }
     }
 }

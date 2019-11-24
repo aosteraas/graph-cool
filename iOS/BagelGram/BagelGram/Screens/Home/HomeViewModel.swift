@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
-class HomeViewModel : UIViewModel {
+class HomeViewModel
+//: UIViewModel
+{
     
 }

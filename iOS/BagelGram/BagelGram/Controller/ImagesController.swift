@@ -14,6 +14,8 @@ import Apollo
 struct PageViewController : UIViewControllerRepresentable {
     var controllers: [UIViewController]
     @State public var imageData: GetImagesQuery.Data?
+    var watcher: GraphQLQueryWatcher<GetImagesQuery>?
+    var images: [GetImagesQuery.Data.GetImage]?
     
     func makeUIViewController(context: Context) -> UIPageViewController {
         let pageViewController = UIPageViewController(
@@ -28,18 +30,14 @@ struct PageViewController : UIViewControllerRepresentable {
             [controllers[0]], direction: .forward, animated: true)
     }
     
-    func fetchData() {
-//        apollo.fetch(query: GetImagesQuery()) { result in
-//            guard let data = try? result.get().data else { return }
-//            self.imageData = data
+//    mutating func fetchData() {
+//        Server.shared.apollo.watch(query: GetImagesQuery()) { result in
 //            switch result {
-//                case.success(let result):
-//                    print(result)
-//                case.failure(let error):
-//                    print(error)
-//
+//            case .success(let res):
+//                self.images = res.data?.getImages! as? [GetImagesQuery.Data.GetImage]
+//            case .failure(let error):
+//                NSLog("Error while fetching query: \(error.localizedDescription)")
 //            }
 //        }
-    }
-
+//    }
 }

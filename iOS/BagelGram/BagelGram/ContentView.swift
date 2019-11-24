@@ -10,8 +10,35 @@ import SwiftUI
 import Apollo
 import Network
 
+
+class ImageData: ObservableObject {
+    @Published var data: [GetImagesQuery.Data.GetImage]?
+    init() {
+        loadData()
+    }
+    func loadData() {
+        Server.shared.apollo.fetch(query: GetImagesQuery()) { result in
+            guard let data = try? result.get().data else { return }
+
+            if let stuff = data.getImages?.compactMap({$0}) {
+                self.data = stuff
+            }
+
+            switch result {
+                case.success(let result):
+                    print(result)
+                case.failure(let error):
+                    print(error)
+
+            }
+        }
+    }
+}
+
 struct ContentView: View {
     private let bagelPink = UIColor(red: 0.95805620825129523, green: 0.28210045499878755, blue: 1, alpha: 1)
+    
+    @ObservedObject private var data = ImageData()
     
     init() {
         let navAppearance = UINavigationBar.appearance()
@@ -22,32 +49,30 @@ struct ContentView: View {
         ]
     }
     
-     func doThing() {
-        
-//           apollo.fetch(query: GetImagesQuery()) { result in
-//               switch result {
-//               case .success(let graphQLResult):
-//                let things:[GetImagesQuery.Data.GetImage?]? = graphQLResult.data?.getImages
-//                   print(things)
-//               case .failure(let error):
-//                 NSLog("Error while fetching query: \(error.localizedDescription)")
-//               }
-//               guard let data = try? result.get().data else {return}
-//               print(data)
-//               
-//           }
-       }
+    func thing () {
+        data.loadData()
+    }
     
-//    let data = controller.something
     var body: some View {
         NavigationView {
             
-            Text("Hello, World!")
-                .font(.title)
- 
 
+            ScrollView {
+                Text("Hello, World!")
+                    .font(.title)
+                
+                VStack(alignment: .leading, spacing: 2){
+                   
+                    ForEach(data.data ?? [], id: \.id) { imageItem in
+                        Text("Something \(imageItem.source)")
+                    }
+                }
+            }
+            
+//            .onAppear { self.thing() }
             .navigationBarTitle("BagelGram", displayMode: .inline)
         }
+        
     }
     
 }
