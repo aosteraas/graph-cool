@@ -78,11 +78,13 @@ export type Image = {
   caption: Scalars['String'],
   comments?: Maybe<Array<Maybe<Comment>>>,
   /** The Image ID */
-  id?: Maybe<Scalars['ID']>,
+  id: Scalars['ID'],
   source: Scalars['String'],
+  /** Number of likes an image has */
+  totalLikes: Scalars['Int'],
   /** The date the image was uploaded */
   uploaded: Scalars['Date'],
-  user?: Maybe<User>,
+  user: User,
 };
 
 
@@ -161,7 +163,7 @@ export type GetImagesQuery = (
   { __typename?: 'Query' }
   & { getImages: Maybe<Array<Maybe<(
     { __typename?: 'Image' }
-    & Pick<Image, 'id' | 'source' | 'caption' | 'uploaded'>
+    & Pick<Image, 'id' | 'source' | 'caption' | 'uploaded' | 'totalLikes'>
   )>>> }
 );
 
@@ -173,6 +175,7 @@ export const GetImagesDocument = gql`
     source
     caption
     uploaded
+    totalLikes
   }
 }
     `;

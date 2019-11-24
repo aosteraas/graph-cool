@@ -7,6 +7,7 @@ export const QUERY_GET_IMAGES = gql`
       source
       caption
       uploaded
+      totalLikes
     }
   }
 `;

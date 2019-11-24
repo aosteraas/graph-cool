@@ -12,7 +12,7 @@ namespace BagelGram.API.Query.Types
             Field(x => x.Id, type: typeof(IdGraphType))
                 .Description("The Comment ID");
 
-            Field(x => x.Text)
+            Field(x => x.Text, type: typeof(NonNullGraphType<StringGraphType>))
                 .Description("The text of the comment");
 
             Field(x => x.Image, type: typeof(ImageType))

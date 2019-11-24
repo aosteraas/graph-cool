@@ -9,7 +9,7 @@ namespace BagelGram.API.Query.Types
         {
             Name = "Image";
 
-            Field(x => x.Id, type: typeof(IdGraphType))
+            Field(x => x.Id, type: typeof(NonNullGraphType<IdGraphType>))
                 .Description("The Image ID");
 
             Field<NonNullGraphType<StringGraphType>>(nameof(Image.Source));
@@ -20,11 +20,11 @@ namespace BagelGram.API.Query.Types
             Field(x => x.Caption)
                 .Description("The caption of the image");
 
-            Field<UserType>(nameof(Image.User));
+            Field<NonNullGraphType<UserType>>(nameof(Image.User));
             Field<ListGraphType<CommentType>>(nameof(Image.Comments));
 
             Field(
-                typeof(IntGraphType),
+                typeof(NonNullGraphType<IntGraphType>),
                 "TotalLikes",
                 "Number of likes an image has",
                 null,
