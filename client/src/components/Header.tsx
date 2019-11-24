@@ -8,6 +8,8 @@ const HeaderStyle = styled.header`
   align-items: center;
   background: rgb(244, 72, 255);
   color: #fff;
+  position: fixed;
+  width: 100%;
 `;
 const Logo = styled.img`
   max-height: 50px;

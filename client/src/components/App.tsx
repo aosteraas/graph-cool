@@ -4,10 +4,10 @@ import { Images } from './Images';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <>
       <Header />
       <Images />
-    </div>
+    </>
   );
 };
 
