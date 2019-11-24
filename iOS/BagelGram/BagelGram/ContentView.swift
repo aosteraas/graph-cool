@@ -32,27 +32,37 @@ class ImageData: ObservableObject {
 
 struct ContentView: View {
     private let bagelPink = UIColor(red: 0.95805620825129523, green: 0.28210045499878755, blue: 1, alpha: 1)
-    
+    private let bagelFont = UIFont(name: "Chalkboard SE", size: 20)
     @ObservedObject private var data = ImageData()
     
     init() {
         let navAppearance = UINavigationBar.appearance()
         navAppearance.barTintColor = bagelPink
         navAppearance.titleTextAttributes = [
-            .font: UIFont(name: "Chalkboard SE", size: 20)!,
+            .font: bagelFont!,
             .foregroundColor: UIColor.white
         ]
     }
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 1) {
-                ForEach(data.data , id: \.id) { imageItem in
-                    Text("Something \(imageItem.source)")
+            
+            VStack {
+                ForEach(data.data, id: \.id) { imageItem in
+                    VStack {
+                        Group {
+                            ImageLoadingView(url: URL(string: "http://localhost:5000\(imageItem.source)")!)
+                            Text("Bagel doing something")
+                                .font(Font.custom("Chalkboard SE", size: 20))
+                        }
+                        
+                    }
+                    
                 }
             }
             .navigationBarTitle("BagelGram", displayMode: .inline)
         }
+
     }
 }
 
