@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +22,9 @@ namespace BagelGram.Data.Repositories
             var newImage = new Image
             {
                 UserId = image.UserId,
-                Source = image.Source
+                Source = image.Source,
+                Caption = image.Caption,
+                Uploaded = DateTime.Now
             };
             await _context.AddAsync(newImage);
             await _context.SaveChangesAsync();
