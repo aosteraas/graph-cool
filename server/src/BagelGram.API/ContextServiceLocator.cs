@@ -10,6 +10,7 @@ namespace BagelGram.API.Services
         public IUserRepository UserRepository => _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
         public IImageRepository ImageRepository => _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IImageRepository>();
         public ICommentRepository CommentRepository => _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<ICommentRepository>();
+        public ILikeRepository LikeRepository => _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<ILikeRepository>();
 
         public ContextServiceLocator(IHttpContextAccessor httpContextAccessor)
         {
