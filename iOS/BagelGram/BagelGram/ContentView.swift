@@ -80,13 +80,16 @@ struct ImageColumn: View {
                         Text("Bagel")
                             .font(Font.custom("Chalkboard SE", size: 20))
                             .bold()
+                            .frame(minWidth: 0, alignment: .leading)
                         Text(imageItem.caption)
                             .font(Font.custom("Chalkboard SE", size: 20))
+                            .frame(minWidth: 0, alignment: .leading)
                     }
                     
                     HStack {
                         Text("Posted \(imageItem.uploaded)")
                             .font(Font.custom("Chalkboard SE", size: 16))
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     }
                     
                         
