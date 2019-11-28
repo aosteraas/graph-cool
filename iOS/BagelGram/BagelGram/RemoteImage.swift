@@ -12,15 +12,20 @@ import Combine
 import Foundation
 
 struct ImageLoadingView: View {
-    @ObservedObject var imageLoader: ImageLoader
-    
+    @ObservedObject private var imageLoader: ImageLoader
+    private static var placeholder: Image = Image(uiImage: UIImage(named: "logo.png")!)
     init(url: URL) {
         imageLoader = ImageLoader(url: url)
+     
     }
     
     var body: some View {
         ZStack {
-            if imageLoader.image != nil {
+            if (imageLoader.image == nil) {
+                ImageLoadingView.placeholder
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+            } else {
                 Image(uiImage: imageLoader.image!)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -35,8 +40,13 @@ final class ImageLoader: ObservableObject {
     enum ImageLoadingError: Error {
         case incorrectData
     }
+        let objectWillChange = ObservableObjectPublisher()
 
-    @Published private(set) var image: UIImage? = nil
+    @Published private(set) var image: UIImage? = nil {
+        willSet {
+            objectWillChange.send()
+        }
+    }
     
     private let url: URL
     private var cancellable: AnyCancellable?

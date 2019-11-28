@@ -2,5 +2,8 @@ query GetImages {
   getImages {
     id
     source
+    caption
+    uploaded
+    totalLikes
   }
 }

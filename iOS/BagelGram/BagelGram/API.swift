@@ -12,6 +12,9 @@ public final class GetImagesQuery: GraphQLQuery {
         __typename
         id
         source
+        caption
+        uploaded
+        totalLikes
       }
     }
     """
@@ -53,8 +56,11 @@ public final class GetImagesQuery: GraphQLQuery {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .scalar(GraphQLID.self)),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("source", type: .nonNull(.scalar(String.self))),
+        GraphQLField("caption", type: .nonNull(.scalar(String.self))),
+        GraphQLField("uploaded", type: .nonNull(.scalar(String.self))),
+        GraphQLField("totalLikes", type: .nonNull(.scalar(Int.self))),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -63,8 +69,8 @@ public final class GetImagesQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID? = nil, source: String) {
-        self.init(unsafeResultMap: ["__typename": "Image", "id": id, "source": source])
+      public init(id: GraphQLID, source: String, caption: String, uploaded: String, totalLikes: Int) {
+        self.init(unsafeResultMap: ["__typename": "Image", "id": id, "source": source, "caption": caption, "uploaded": uploaded, "totalLikes": totalLikes])
       }
 
       public var __typename: String {
@@ -77,22 +83,51 @@ public final class GetImagesQuery: GraphQLQuery {
       }
 
       /// The Image ID
-      public var id: GraphQLID? {
+      public var id: GraphQLID {
         get {
-          return resultMap["id"] as? GraphQLID
+          return resultMap["id"]! as! GraphQLID
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")
         }
       }
 
-      /// The source url of the image
       public var source: String {
         get {
           return resultMap["source"]! as! String
         }
         set {
           resultMap.updateValue(newValue, forKey: "source")
+        }
+      }
+
+      /// The caption of the image
+      public var caption: String {
+        get {
+          return resultMap["caption"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "caption")
+        }
+      }
+
+      /// The date the image was uploaded
+      public var uploaded: String {
+        get {
+          return resultMap["uploaded"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "uploaded")
+        }
+      }
+
+      /// Number of likes an image has
+      public var totalLikes: Int {
+        get {
+          return resultMap["totalLikes"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "totalLikes")
         }
       }
     }

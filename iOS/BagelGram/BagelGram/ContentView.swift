@@ -46,8 +46,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            
-            ExtractedView()
+            ImageColumn()
             .navigationBarTitle("BagelGram", displayMode: .inline)
         }
 
@@ -62,32 +61,39 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
-struct ExtractedView: View {
+struct ImageColumn: View {
     @ObservedObject private var data = ImageData()
     init() {
-        // To remove only extra separators below the list:
+        // remove extra separators below the list
         UITableView.appearance().tableFooterView = UIView()
-
-        // To remove all separators including the actual ones:
+        // remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
     }
 
     var body: some View {
         
-        VStack(alignment: .trailing) {
-            List {
-                ForEach(data.data, id: \.id) { imageItem in
-                    VStack {
-                        Group {
-                            ImageLoadingView(url: URL(string: "http://localhost:5000\(imageItem.source)")!)
-                            Text("Bagel doing something")
-                                .font(Font.custom("Chalkboard SE", size: 20))
-                        }
-                        
+        VStack(alignment: .leading) {
+            List (data.data, id: \.id) { imageItem in
+                VStack {
+                    ImageLoadingView(url: URL(string: "http://localhost:5000\(imageItem.source)")!)
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("Bagel")
+                            .font(Font.custom("Chalkboard SE", size: 20))
+                            .bold()
+                        Text(imageItem.caption)
+                            .font(Font.custom("Chalkboard SE", size: 20))
                     }
+                    
+                    HStack {
+                        Text("Posted \(imageItem.uploaded)")
+                            .font(Font.custom("Chalkboard SE", size: 16))
+                    }
+                    
+                        
                 }
             }
         }
-        .offset(y: 10)
+    .offset(y: 10)
+    .fixedSize(horizontal: false, vertical: false)
     }
 }
