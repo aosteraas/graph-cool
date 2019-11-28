@@ -64,10 +64,18 @@ struct ContentView_Previews: PreviewProvider {
 
 struct ExtractedView: View {
     @ObservedObject private var data = ImageData()
+    init() {
+        // To remove only extra separators below the list:
+        UITableView.appearance().tableFooterView = UIView()
+
+        // To remove all separators including the actual ones:
+        UITableView.appearance().separatorStyle = .none
+    }
+
     var body: some View {
         
         VStack(alignment: .trailing) {
-//            ScrollView(.vertical, showsIndicators: false) {
+            List {
                 ForEach(data.data, id: \.id) { imageItem in
                     VStack {
                         Group {
@@ -78,9 +86,8 @@ struct ExtractedView: View {
                         
                     }
                 }
-//            }
-            
+            }
         }
-        .offset(y: 80)
+        .offset(y: 10)
     }
 }
