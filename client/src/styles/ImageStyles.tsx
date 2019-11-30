@@ -5,7 +5,7 @@ export const ImageColumn = styled.section`
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  padding-top: 72px;
+  padding: 72px 0;
 `;
 
 export const ImageItem = styled.article`
