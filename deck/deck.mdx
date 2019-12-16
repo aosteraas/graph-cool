@@ -1,0 +1,131 @@
+import { Image, Notes, Appear, Split, Horizontal } from "mdx-deck";
+import { future, highlight } from "@mdx-deck/themes";
+import { Squares } from "./components";
+export const themes = [future, highlight];
+
+# GraphQL
+
+<Appear>
+  <h2>I don't have a cool title for this</h2>
+  <h3>But I do have a terrible poem</h3>
+</Appear>
+<Squares />
+
+---
+
+# GraphQL
+
+<Appear>
+  <h3>Roses are red</h3>
+  <h3>Violets are blue</h3>
+  <h3>Yada yada yada</h3>
+  <h3>GraphQL and You</h3>
+</Appear>
+<Squares />
+
+---
+
+# 👍
+
+## Thanks for coming
+
+<Squares />
+
+---
+
+# But seriously what's the deal with GraphQL
+
+<Squares />
+
+---
+
+# GraphQL
+
+- J.A.F.F.I (est. 2012)
+- Query Language (¿¡oh really!?)
+- 🚂 Strong hype train 🚂
+- Uses `Queries` a la `GET`
+- and `Mutations` like `POST|PATCH|DELETE|ETC`
+- More declarative than REST
+- Better than SOAP in your eyes
+- Big and unusual
+- Has a lot of cool tools
+- A new way of thinking
+
+<Squares />
+
+---
+
+# But what does a controller look like then?
+
+<Squares />
+
+---
+
+# Like this
+
+<div style={{fontSize:`70%`}}>
+
+```cs
+[HttpPost]
+public async Task<IActionResult> Post([FromBody] GraphQLQuery query)
+{
+    if (query == null)
+        throw new ArgumentNullException(nameof(query));
+
+    var inputs = query.Variables.ToInputs();
+
+    var executionOptions = new ExecutionOptions
+    {
+        Schema = _schema,
+        Query = query.Query,
+        Inputs = inputs
+    };
+
+    var result = await _documentExecuter.ExecuteAsync(executionOptions);
+
+    if (result.Errors?.Count > 0)
+        return BadRequest(result);
+
+    return Ok(result);
+}
+```
+
+</div>
+
+<Squares />
+
+---
+
+# That's It
+
+## One Controller, One Route
+
+<Squares />
+
+---
+
+## Instead we define Schemas, Types, and Resolvers
+
+<div style={{fontSize:`80%`}}>
+
+```cs
+// Query Example
+FieldAsync<ListGraphType<CommentType>>(
+    name: "commentsForUser",
+
+    description: "All comments from a given user",
+
+    arguments: new QueryArguments(
+        new QueryArgument<NonNullGraphType<IdGraphType>>
+            { Name = "userId", Description = "The User's Id" }
+        ),
+
+    resolve: async context => await locator
+        .CommentRepository
+        .GetImageComments(context.GetArgument<int>("userId"))
+);
+```
+
+</div>
+<Squares />

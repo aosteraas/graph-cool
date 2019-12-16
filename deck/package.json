@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "deck": "mdx-deck deck.mdx"
+  },
   "dependencies": {
     "mdx-deck": "^3.0.13"
   }
