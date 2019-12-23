@@ -5,12 +5,14 @@ import * as serviceWorker from './serviceWorker';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { GlobalStyle } from './styles/GlobalStyle';
+import { Header } from './components/Header';
 
 const client = new ApolloClient();
 
 ReactDOM.render(
   <ApolloProvider client={client}>
     <GlobalStyle />
+    <Header />
     <App />
   </ApolloProvider>,
   document.getElementById('root')

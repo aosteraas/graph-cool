@@ -1,15 +1,16 @@
 import React from 'react';
-import { Header } from './Header';
-import { Images } from './Images';
-import { Footer } from './Footer';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Home } from '../screens/Home';
+import { Upload } from '../screens/Upload';
 
 const App: React.FC = () => {
   return (
-    <>
-      <Header />
-      <Images />
-      <Footer />
-    </>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/upload" component={Upload} />
+      </Switch>
+    </Router>
   );
 };
 

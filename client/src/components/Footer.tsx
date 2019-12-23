@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { faCameraRetro } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FooterStyle } from '../styles/LayoutStyles';
@@ -6,7 +7,9 @@ import { FooterStyle } from '../styles/LayoutStyles';
 export const Footer = () => {
   return (
     <FooterStyle>
-      <FontAwesomeIcon size="2x" icon={faCameraRetro} />
+      <Link to="/upload">
+        <FontAwesomeIcon size="2x" icon={faCameraRetro} />
+      </Link>
     </FooterStyle>
   );
 };
