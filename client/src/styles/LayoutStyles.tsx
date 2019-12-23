@@ -4,7 +4,7 @@ export const HeaderStyle = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(244, 72, 255);
+  background: ${({ theme }) => theme.colors.pink};
   color: #fff;
   position: fixed;
   width: 100%;
@@ -15,7 +15,7 @@ export const FooterStyle = styled.footer`
   bottom: 0;
   width: 100%;
   display: flex;
-  background: rgb(244, 72, 255);
+  background: ${({ theme }) => theme.colors.pink};
   color: #fff;
   justify-content: center;
   padding: 0.425rem 0;
