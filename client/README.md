@@ -1,3 +1,7 @@
+these were both good but slightly different somehow?
+apollo service:download --endpoint=http://localhost:5000/graphql
+apollo client:download schema2.json --endpoint=http://localhost:5000/graphql
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

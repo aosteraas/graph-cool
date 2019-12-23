@@ -1,6 +1,7 @@
 import { Image, Notes, Appear, Split, Horizontal } from "mdx-deck";
 import { future, highlight } from "@mdx-deck/themes";
 import { Squares } from "./components";
+import atom from './atom.gif'
 export const themes = [future, highlight];
 
 # GraphQL
@@ -39,7 +40,7 @@ export const themes = [future, highlight];
 
 ---
 
-# GraphQL
+# In-a-Nutshell-QL
 
 - J.A.F.F.I (est. 2012)
 - Query Language (¿¡oh really!?)
@@ -50,13 +51,40 @@ export const themes = [future, highlight];
 - Better than SOAP in your eyes
 - Big and unusual
 - Has a lot of cool tools
+- Everything is a `POST` request
 - A new way of thinking
 
 <Squares />
 
 ---
 
-# But what does a controller look like then?
+<Squares />
+
+# Terminology TL:DR;
+
+- Query; how you get data
+- Mutation: how you create/update/etc data
+- Schema: describes what your API does
+- Field: data requested to/from the schema
+
+There's a lot more but these are the most important.
+
+---
+
+<Squares />
+
+# Use Cases of GraphQL
+
+- As Middleware or an Aggregator
+- As a Proxy
+- Websockets with slightly less pain
+- Minimising request count and size
+
+<Notes>Nowhere you wouldn't have thought of</Notes>
+
+---
+
+# What does a controller look like?
 
 <Squares />
 
@@ -105,7 +133,7 @@ public async Task<IActionResult> Post([FromBody] GraphQLQuery query)
 
 ---
 
-## Instead we define Schemas, Types, and Resolvers
+## Instead we define a Schema, Types, and Resolvers
 
 <div style={{fontSize:`80%`}}>
 
@@ -128,4 +156,229 @@ FieldAsync<ListGraphType<CommentType>>(
 ```
 
 </div>
+<Squares />
+
+---
+
+# More Terminology TL:DR;
+
+- **Resolvers:** what functions/methods manage data IO
+- **Types:** what data structures are involved in IO
+- **Schema:** the types, queries, and mutations used in IO
+
+<Squares />
+
+---
+
+# Up and Atom with .NET
+
+<Image src={atom} />
+
+<Squares />
+
+---
+
+# Get your Nuget all the way right
+
+```
+dotnet add package GraphQL
+dotnet add package GraphQL.Server.Transports.AspNetCore
+dotnet add package GraphQL.Server.Ui.Playground
+```
+
+<Squares />
+
+---
+
+# Add to Startup
+<div style={{fontSize:`80%`}}>
+
+```cs
+// Startup.cs
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddGraphQL(_ =>
+    {
+        _.EnableMetrics = true;
+        _.ExposeExceptions = true;
+    })
+    .AddGraphTypes(ServiceLifetime.Scoped);
+}
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    app.UseGraphQL<ISchema>();
+    app.UseGraphQLPlayground();
+}
+```
+</div>
+
+<Squares />
+
+---
+
+# Make a Type or Two
+
+<div style={{fontSize: `80%`}}>
+
+```cs
+public class UserType : ObjectGraphType<User>
+{
+    public UserType()
+    {
+        Name = "User";
+
+        Field(x => x.Id, type: typeof(IdGraphType))
+            .Description("The User ID");
+
+        Field(x => x.UserName)
+            .Description("The User's display name");
+
+        Field(x => x.Images, type: typeof(ListGraphType<ImageType>))
+            .Description("The User's images");
+
+        Field(x => x.Comments, type: typeof(ListGraphType<CommentType>))
+            .Description("Comments the user has made");
+    }
+}
+```
+
+</div>
+
+<Squares />
+
+---
+
+# Create a Query
+
+<div style={{fontSize: `80%`}}>
+
+```cs
+public BagelQuery(ContextServiceLocator locator)
+{
+    Name = "Query";
+
+    FieldAsync<UserType>(
+        name: "getUser",
+        description: "A User of BagelGram",
+
+        arguments: new QueryArguments(
+            new QueryArgument<NonNullGraphType<IdGraphType>>
+            {
+                Name = "Id",
+                Description = "The User's Id"
+            }),
+        resolve: async context =>
+        {
+            var id = context.GetArgument<int>("id");
+            return await locator.UserRepository.GetUserAsync(id);
+        }
+    );
+}
+```
+
+</div>
+
+<Squares />
+
+---
+
+# Define your Schema
+
+```cs
+public class AppSchema : Schema
+{
+    public AppSchema(IServiceProvider provider) : base(provider)
+    {
+        Query = provider.GetRequiredService<BagelQuery>();
+        Mutation = provider.GetRequiredService<AppMutation>();
+    }
+}
+```
+
+<Squares />
+
+---
+
+# Now for the dirty parts
+
+## AKA I wouldn't use .NET for <br/>this again in the near future
+
+### The Defacto library lacks maturity<br/>and isn't fun with DI
+
+#### Why didn't I just use TypeScript?
+
+<Squares />
+
+---
+
+# EG
+
+<div style={{fontSize:`50%`}}>
+
+```cs
+public class ContextServiceLocator
+{
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IWebHostEnvironment _env;
+    public string ContentRootPath => _env.ContentRootPath;
+    public IUserRepository UserRepository => _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
+    public IImageRepository ImageRepository => _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IImageRepository>();
+    public ICommentRepository CommentRepository => _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<ICommentRepository>();
+    public ILikeRepository LikeRepository => _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<ILikeRepository>();
+
+    public ContextServiceLocator(IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env)
+    {
+        _httpContextAccessor = httpContextAccessor;
+        _env = env;
+    }
+}
+```
+
+</div>
+
+<Squares />
+
+---
+
+# And Also
+
+<div style={{fontSize: `80%`}}>
+
+```cs
+services.AddSingleton<BagelQuery>();
+services.AddSingleton<UserQuery>();
+services.AddSingleton<UserType>();
+// times a million for all the queries and
+// mutations and types you have, oh my
+```
+
+</div>
+
+<Squares />
+
+---
+
+# Moving right along
+
+<Squares />
+
+---
+
+# It's fairly Self Documenting
+
+Let's look at the [Playground](http://localhost:5000/ui/playground)
+
+Thanks `app.UseGraphQLPlayground();`
+
+<Squares />
+
+---
+
+# Tech Used
+
+- **.NET Core:** [GraphQL .NET](https://graphql-dotnet.github.io/docs/getting-started/introduction)
+- **React:** [Apollo Boost](https://www.apollographql.com/docs/react/get-started/#apollo-boost) and [GraphQL Code Generator](https://github.com/dotansimha/graphql-code-generator)
+- **iOS:** [Apollo iOS](https://github.com/apollographql/apollo-ios)
+
 <Squares />

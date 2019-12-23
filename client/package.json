@@ -42,7 +42,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "generate": "apollo codegen:generate --excludes=node_modules/* --includes=**/*.tsx --endpoint=http://localhost:5000/graphql --target=typescript --tagName=gql src/generated",
-    "schema": "apollo schema:download -k --endpoint=https://localhost:5001/graphql ./src/schema.json",
+    "schema": "apollo schema:download -k --endpoint=http://localhost:5000/graphql ./src/schema.json",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
