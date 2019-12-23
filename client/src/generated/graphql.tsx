@@ -167,6 +167,19 @@ export type UserInput = {
 };
 
 
+export type CreateImageMutationMutationVariables = {
+  image: ImageUpload
+};
+
+
+export type CreateImageMutationMutation = (
+  { __typename?: 'AppMutation' }
+  & { createImage: Maybe<(
+    { __typename?: 'Image' }
+    & Pick<Image, 'caption' | 'id' | 'source'>
+  )> }
+);
+
 export type GetImagesQueryVariables = {};
 
 
@@ -179,6 +192,40 @@ export type GetImagesQuery = (
 );
 
 
+export const CreateImageMutationDocument = gql`
+    mutation createImageMutation($image: ImageUpload!) {
+  createImage(image: $image) {
+    caption
+    id
+    source
+  }
+}
+    `;
+export type CreateImageMutationMutationFn = ApolloReactCommon.MutationFunction<CreateImageMutationMutation, CreateImageMutationMutationVariables>;
+
+/**
+ * __useCreateImageMutationMutation__
+ *
+ * To run a mutation, you first call `useCreateImageMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateImageMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createImageMutationMutation, { data, loading, error }] = useCreateImageMutationMutation({
+ *   variables: {
+ *      image: // value for 'image'
+ *   },
+ * });
+ */
+export function useCreateImageMutationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateImageMutationMutation, CreateImageMutationMutationVariables>) {
+        return ApolloReactHooks.useMutation<CreateImageMutationMutation, CreateImageMutationMutationVariables>(CreateImageMutationDocument, baseOptions);
+      }
+export type CreateImageMutationMutationHookResult = ReturnType<typeof useCreateImageMutationMutation>;
+export type CreateImageMutationMutationResult = ApolloReactCommon.MutationResult<CreateImageMutationMutation>;
+export type CreateImageMutationMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateImageMutationMutation, CreateImageMutationMutationVariables>;
 export const GetImagesDocument = gql`
     query GetImages {
   getImages {

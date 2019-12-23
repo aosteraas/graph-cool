@@ -392,3 +392,129 @@ You think about data and it's structure, <br/>not how you'd wrangle a REST API
 - **iOS:** [Apollo iOS](https://github.com/apollographql/apollo-ios)
 
 <Squares />
+
+---
+
+# Let's Talk Client Side
+
+<Squares />
+
+---
+
+# GraphQL on the Client
+
+You need two things
+
+1. A way to interact with the server
+2. A way to keep definitions up to date
+
+<Squares />
+
+---
+
+# Apollo vs GraphQL Codegen
+
+In short, Apollo is a great client, but suboptimal for<br/> code generation, and that's where GraphQL Codegen comes in.
+
+<Squares />
+
+---
+
+# GraphQL Code Generation
+
+```yaml
+overwrite: true
+schema: 'http://localhost:5000/graphql'
+documents: './src/queries**/*.{ts|tsx}'
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+      - 'fragment-matcher'
+    config:
+      withComponent: false
+      withHOC: false
+      withHooks: true
+
+```
+
+<Squares />
+
+---
+
+# To Generate
+
+```json
+"codegen": "graphql-codegen --config codegen.yml"
+```
+
+<Squares />
+
+---
+
+# High Bang for Buck
+
+```jsx
+export function useGetImagesQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    GetImagesQuery,
+    GetImagesQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<GetImagesQuery, GetImagesQueryVariables>(
+    GetImagesDocument,
+    baseOptions
+  );
+}
+```
+
+<Squares />
+
+---
+
+# Apollo
+
+```jsx
+const client = new ApolloClient();
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <Header />
+    <App />
+  </ApolloProvider>,
+  document.getElementById('root')
+);
+```
+
+<Squares />
+
+---
+
+# Putting Apollo to Work
+
+<div style={{fontSize:`80%`}}>
+
+```jsx
+export const Images = () => {
+  const { data, error, loading } = useGetImagesQuery();
+  const images = (data && data.getImages) || [];
+  return (
+    <ImageColumn>
+      {images.map((image, idx) => (
+        <ImageItem key={idx}>
+          <SquareImage src={`http://localhost:5000${image!.source}`} />
+          <ImageActions>
+            <FontAwesomeIcon icon={['far', 'heart']} />
+          </ImageActions>
+          {/* casually omitted */}
+        </ImageItem>
+      ))}
+    </ImageColumn>
+  );
+};
+```
+
+</div>
+
+<Squares />
