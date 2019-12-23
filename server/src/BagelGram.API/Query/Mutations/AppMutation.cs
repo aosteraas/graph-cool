@@ -24,16 +24,15 @@ namespace BagelGram.API.Query.Mutations
                 }
             );
 
-            FieldAsync<ImageUpload>(
+            FieldAsync<ImageType>(
                 "createImage",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<ImageUpload>>()
+                    new QueryArgument<NonNullGraphType<ImageUpload>>() { Name = "image" }
                 ),
                 resolve: async context =>
                 {
-                    var imageData = context.GetArgument<string>("ImageData");
-                    var caption = context.GetArgument<string>("Caption");
-                    var image = await locator.ImageRepository.AddImageAsync(imageData, caption);
+                    var img = context.GetArgument<ImageUploadModel>("image");
+                    var image = await locator.ImageRepository.AddImageAsync(img.ImageData, img.Caption);
                     return image;
                 }
             );

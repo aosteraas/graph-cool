@@ -3,7 +3,7 @@ using GraphQL.Types;
 
 namespace BagelGram.API.Query.Types
 {
-    public class ImageUpload : ObjectGraphType<object>
+    public class ImageUpload : InputObjectGraphType
     {
         public ImageUpload()
         {
