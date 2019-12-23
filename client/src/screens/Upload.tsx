@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react';
-
 import { ImageColumn } from '../styles/ImageStyles';
 import { ImagePicker } from '../components/ImagePicker';
-import { Comment, Controls } from '../styles/FileInputStyle';
+import { Comment, Controls } from '../styles/UploadStyles';
 import { ImageEditor, AvatarEditor } from '../components/ImageEditor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useMutation } from '@apollo/react-hooks';
@@ -25,7 +24,6 @@ export const Upload: React.FC = () => {
 
   const onSave = () => {
     if (!editor.current) return;
-    const canvas = editor.current.getImage();
     const img = editor.current.getImageScaledToCanvas().toDataURL();
     return img;
   };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileInputStyle } from '../styles/FileInputStyle';
+import { FileInputStyle } from '../styles/UploadStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCameraRetro } from '@fortawesome/free-solid-svg-icons';
 
