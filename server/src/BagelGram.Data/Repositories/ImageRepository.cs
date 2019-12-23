@@ -18,9 +18,9 @@ namespace BagelGram.Data.Repositories
             _context = context;
         }
 
-        public async Task<Image> AddImageAsync(string imageData, string caption)
+        public async Task<Image> AddImageAsync(string path, string imageData, string caption)
         {
-            var source = SaveImage(imageData);
+            var source = SaveImage(path, imageData);
             var image = new Image
             {
                 Source = source,
@@ -33,11 +33,13 @@ namespace BagelGram.Data.Repositories
             return image;
         }
 
-        public string SaveImage(string imageData)
+        public string SaveImage(string path, string imageData)
         {
-            var bytes = Convert.FromBase64String(imageData);
-            var filePath = $"/uploads/{Guid.NewGuid()}.jpg";
-            using (var imageFile = new FileStream($"~/{filePath}", FileMode.Create))
+            var base64String = imageData.Split(',');
+            var bytes = Convert.FromBase64String(base64String[1]);
+            var fileName = Guid.NewGuid();
+            var filePath = $"/uploads/{fileName}.jpg";
+            using (var imageFile = new FileStream($"{path}{filePath}", FileMode.Create))
             {
                 imageFile.Write(bytes, 0, bytes.Length);
                 imageFile.Flush();

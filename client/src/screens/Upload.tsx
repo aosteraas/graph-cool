@@ -1,9 +1,13 @@
 import React, { useState, useRef } from 'react';
+
 import { ImageColumn } from '../styles/ImageStyles';
 import { ImagePicker } from '../components/ImagePicker';
 import { Comment, Controls } from '../styles/FileInputStyle';
 import { ImageEditor, AvatarEditor } from '../components/ImageEditor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useMutation } from '@apollo/react-hooks';
+import { ADD_IMAGE } from '../mutations/ImageMutations';
+import { ImageUpload, Image } from '../generated/graphql';
 
 export const Upload: React.FC = () => {
   const [image, setImage] = useState<File | undefined>(undefined);
@@ -23,9 +27,16 @@ export const Upload: React.FC = () => {
     if (!editor.current) return;
     const canvas = editor.current.getImage();
     const img = editor.current.getImageScaledToCanvas().toDataURL();
-    const formData = new FormData();
-    formData.append('file', img);
+    return img;
   };
+
+  const [addImage, { data, error }] = useMutation<{ addImage: Image }, { image: ImageUpload }>(
+    ADD_IMAGE,
+    {
+      variables: { image: { imageData: onSave()!, caption } }
+    }
+  );
+  // addImage();
 
   return (
     <ImageColumn>
@@ -51,6 +62,7 @@ export const Upload: React.FC = () => {
         </div>
       </Controls>
       <Comment onChange={e => setCaption(e.target.value)} type="text" value={caption} />
+      <button onClick={() => addImage()}> Save </button>
     </ImageColumn>
   );
 };

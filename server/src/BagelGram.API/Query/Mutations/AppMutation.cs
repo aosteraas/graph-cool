@@ -32,7 +32,8 @@ namespace BagelGram.API.Query.Mutations
                 resolve: async context =>
                 {
                     var img = context.GetArgument<ImageUploadModel>("image");
-                    var image = await locator.ImageRepository.AddImageAsync(img.ImageData, img.Caption);
+                    var path = locator.ContentRootPath;
+                    var image = await locator.ImageRepository.AddImageAsync(path, img.ImageData, img.Caption);
                     return image;
                 }
             );

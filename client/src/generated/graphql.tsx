@@ -45,7 +45,13 @@ export type Scalars = {
 
 export type AppMutation = {
    __typename?: 'AppMutation',
+  createImage?: Maybe<Image>,
   createUser?: Maybe<User>,
+};
+
+
+export type AppMutationCreateImageArgs = {
+  image: ImageUpload
 };
 
 
@@ -85,6 +91,11 @@ export type Image = {
   /** The date the image was uploaded */
   uploaded: Scalars['Date'],
   user: User,
+};
+
+export type ImageUpload = {
+  imageData: Scalars['String'],
+  caption?: Maybe<Scalars['String']>,
 };
 
 

@@ -11,6 +11,6 @@ namespace BagelGram.Core.Interfaces
         Task<IList<Image>> GetImagesAsync();
         Task<IList<Image>> GetUserImages(int userId);
 
-        Task<Image> AddImageAsync(string imageData, string caption);
+        Task<Image> AddImageAsync(string path, string imageData, string caption);
     }
 }
