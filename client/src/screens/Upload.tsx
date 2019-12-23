@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
-import { Theme } from '../styles/theme';
-import styled from 'styled-components/macro';
 import { ImageColumn } from '../styles/ImageStyles';
 import { ImagePicker } from '../components/ImagePicker';
+import { Comment, Controls } from '../styles/FileInputStyle';
 import { ImageEditor, AvatarEditor } from '../components/ImageEditor';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Upload: React.FC = () => {
   const [image, setImage] = useState<File | undefined>(undefined);
@@ -31,20 +31,26 @@ export const Upload: React.FC = () => {
     <ImageColumn>
       <ImagePicker onImageSelect={onImageSelect} />
       <ImageEditor image={image} scale={scale} rotate={rotate} setRef={setRef} />
-      <div>
-        <div onClick={() => setScale(scale + 0.1)}>+</div>
-        <div onClick={() => setScale(scale - 0.1)}>-</div>
-      </div>
+      <Controls>
+        <div onClick={() => setScale(scale + 0.1)}>
+          <FontAwesomeIcon size="2x" icon="search-plus" />
+        </div>
+        <div onClick={() => setScale(scale - 0.1)}>
+          <FontAwesomeIcon size="2x" icon="search-minus" />
+        </div>
+        <div>
+          <FontAwesomeIcon size="2x" icon="undo" onClick={() => setRotate(rotate - 90)} />
+        </div>
+        <div>
+          <FontAwesomeIcon
+            size="2x"
+            icon="undo"
+            flip="horizontal"
+            onClick={() => setRotate(rotate + 90)}
+          />
+        </div>
+      </Controls>
       <Comment onChange={e => setCaption(e.target.value)} type="text" value={caption} />
     </ImageColumn>
   );
 };
-
-const Comment = styled.input`
-  font-family: 'Chalkboard', 'Comic Sans MS';
-  width: 100%;
-  max-width: 500px;
-  border: ${({ theme }) => theme.borders.default};
-  border-radius: ${({ theme }) => theme.borders.radius};
-  font-size: 1rem;
-`;

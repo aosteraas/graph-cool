@@ -9,3 +9,20 @@ export const FileInputStyle = styled.div`
     display: none;
   }
 `;
+
+export const Comment = styled.input`
+  font-family: 'Chalkboard', 'Comic Sans MS';
+  width: 100%;
+  max-width: 500px;
+  border: ${({ theme }) => theme.borders.default};
+  border-radius: ${({ theme }) => theme.borders.radius};
+  font-size: 1rem;
+`;
+export const Controls = styled.section`
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem 0;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 500px;
+`;

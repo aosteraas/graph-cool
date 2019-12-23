@@ -11,7 +11,7 @@ interface Props {
 export const ImageEditor = React.memo<Props>(({ image, rotate, scale, setRef }) => {
   return (
     <AvatarEditor
-      // ref={setRef}
+      ref={setRef}
       image={image}
       rotate={rotate}
       scale={scale}
