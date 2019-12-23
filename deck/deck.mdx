@@ -129,6 +129,8 @@ public async Task<IActionResult> Post([FromBody] GraphQLQuery query)
 
 ## One Controller, One Route
 
+#### (but also no controllers or routes[wtf? {you'll see}])
+
 <Squares />
 
 ---
@@ -312,7 +314,7 @@ public class AppSchema : Schema
 
 ---
 
-# EG
+# E.G.:
 
 <div style={{fontSize:`50%`}}>
 
@@ -370,6 +372,14 @@ services.AddSingleton<UserType>();
 Let's look at the [Playground](http://localhost:5000/ui/playground)
 
 Thanks `app.UseGraphQLPlayground();`
+
+<Squares />
+
+---
+
+# Server-side TL:DR;
+
+You think about data and it's structure, <br/>not how you'd wrangle a REST API
 
 <Squares />
 
