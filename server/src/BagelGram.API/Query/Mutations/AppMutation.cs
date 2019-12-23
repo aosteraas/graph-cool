@@ -23,6 +23,20 @@ namespace BagelGram.API.Query.Mutations
                     return user;
                 }
             );
+
+            FieldAsync<ImageUpload>(
+                "createImage",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ImageUpload>>()
+                ),
+                resolve: async context =>
+                {
+                    var imageData = context.GetArgument<string>("ImageData");
+                    var caption = context.GetArgument<string>("Caption");
+                    var image = await locator.ImageRepository.AddImageAsync(imageData, caption);
+                    return image;
+                }
+            );
         }
     }
 }
