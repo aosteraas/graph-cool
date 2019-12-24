@@ -59,7 +59,7 @@ namespace BagelGram.API
             services.AddSingleton<UserType>();
             services.AddSingleton<UserInputType>();
             services.AddSingleton<ImageType>();
-            services.AddSingleton<ImageUpload>();
+            services.AddSingleton<ImageInputType>();
             services.AddSingleton<CommentType>();
 
             services.AddTransient<IUserRepository, UserRepository>();

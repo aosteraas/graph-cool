@@ -27,7 +27,7 @@ namespace BagelGram.API.Query.Mutations
             FieldAsync<ImageType>(
                 "createImage",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<ImageUpload>>() { Name = "image" }
+                    new QueryArgument<NonNullGraphType<ImageInputType>>() { Name = "image" }
                 ),
                 resolve: async context =>
                 {

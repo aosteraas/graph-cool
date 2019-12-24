@@ -1,13 +1,14 @@
 using BagelGram.Core.Models;
 using GraphQL.Types;
 
-namespace BagelGram.API.Query.Types
+namespace BagelGram.API.Query.Inputs
 {
-    public class ImageUpload : InputObjectGraphType
+    public class ImageInputType : InputObjectGraphType
     {
-        public ImageUpload()
+        public ImageInputType()
         {
             Name = "ImageUpload";
+            // Image in Base64 format.
             Field(type: typeof(NonNullGraphType<StringGraphType>), "ImageData");
             Field(type: typeof(StringGraphType), "Caption");
         }
