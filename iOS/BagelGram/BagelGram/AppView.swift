@@ -9,21 +9,26 @@
 import SwiftUI
 
 struct AppView: View {
-//    static let order = Order()
     @State var selectedView = 0
+    
+    init() {
+        UITabBar.appearance().barTintColor = UISettings.bagelPink
+    }
     var body: some View {
         TabView(selection: $selectedView) {
-            ContentView()
+            ImageColumn()
                 .tabItem {
-                    Image("list.dash")
-                    Text("Menu")
+                    Image(systemName: "house")
+                    Text("Home")
             }.tag(0)
-            ContentView()
+            AddImageView()
                 .tabItem {
-                    Image(systemName: "square.and.pencil")
-                    Text("Order")
+                    Image(systemName: "camera")
+                    Text("Add")
             }.tag(1)
         }
+
+        .accentColor(.white)
     }
 }
 
