@@ -6,7 +6,7 @@ import { ImageEditor, AvatarEditor } from '../components/ImageEditor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_IMAGE } from '../mutations/ImageMutations';
-import { ImageUpload, Image } from '../generated/graphql';
+import { ImageInput, Image, useCreateImageMutation } from '../generated/graphql';
 
 export const Upload: React.FC = () => {
   const [image, setImage] = useState<File | undefined>(undefined);
@@ -27,13 +27,14 @@ export const Upload: React.FC = () => {
     const img = editor.current.getImageScaledToCanvas().toDataURL();
     return img;
   };
-
-  const [addImage, { data, error }] = useMutation<{ addImage: Image }, { image: ImageUpload }>(
+  const [addImage_, { data: _data, error: _error }] = useCreateImageMutation();
+  const [addImage, { data, error }] = useMutation<{ addImage: Image }, { image: ImageInput }>(
     ADD_IMAGE,
     {
       variables: { image: { imageData: onSave()!, caption } }
     }
   );
+
   // addImage();
 
   return (

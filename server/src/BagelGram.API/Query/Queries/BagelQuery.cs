@@ -70,6 +70,20 @@ namespace BagelGram.API.Query.Queries
                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "userId", Description = "The User's Id" }),
                 resolve: async context => await locator.CommentRepository.GetImageComments(context.GetArgument<int>("userId"))
             );
+
+            FieldAsync<ListGraphType<LikeType>>(
+                name: "likes",
+                description: "Images I have liked",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "userId" }
+                ),
+                resolve: async context =>
+                {
+                    var userId = context.GetArgument<int>("userId");
+                    var likes = await locator.LikeRepository.GetUserLikes(userId);
+                    return likes;
+                }
+            );
             // Field<UserQuery>("users", resolve: context => new { });
             // Field<ImageQuery>("images", resolve: context => new { });
             // Field<CommentQuery>("comments", resolve: context => new { });

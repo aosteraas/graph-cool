@@ -50,7 +50,7 @@ namespace BagelGram.API
             services.AddSingleton<ContextServiceLocator>();
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
             services.AddSingleton<IDocumentWriter, DocumentWriter>();
-
+            // Root Schema types
             services.AddSingleton<BagelQuery>();
             services.AddSingleton<BagelMutation>();
 
@@ -68,6 +68,9 @@ namespace BagelGram.API
             services.AddSingleton<CommentQuery>();
             services.AddSingleton<CommentType>();
             services.AddSingleton<CommentInputType>();
+
+            // Likes
+            services.AddSingleton<LikeType>();
 
             // Repositories
             services.AddTransient<IUserRepository, UserRepository>();

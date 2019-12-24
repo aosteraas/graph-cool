@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 
 export const ADD_IMAGE = gql`
-  mutation createImageMutation($image: ImageUpload!) {
+  mutation createImage($image: ImageInput!) {
     createImage(image: $image) {
       caption
       id
