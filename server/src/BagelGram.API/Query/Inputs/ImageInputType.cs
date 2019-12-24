@@ -7,7 +7,7 @@ namespace BagelGram.API.Query.Inputs
     {
         public ImageInputType()
         {
-            Name = "ImageUpload";
+            Name = "ImageInput";
             // Image in Base64 format.
             Field(type: typeof(NonNullGraphType<StringGraphType>), "ImageData");
             Field(type: typeof(StringGraphType), "Caption");

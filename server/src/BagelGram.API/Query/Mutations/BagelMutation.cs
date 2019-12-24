@@ -7,9 +7,9 @@ using GraphQL.Types;
 
 namespace BagelGram.API.Query.Mutations
 {
-    public class AppMutation : ObjectGraphType
+    public class BagelMutation : ObjectGraphType
     {
-        public AppMutation(ContextServiceLocator locator)
+        public BagelMutation(ContextServiceLocator locator)
         {
             FieldAsync<UserType>(
                 "createUser",
@@ -35,6 +35,19 @@ namespace BagelGram.API.Query.Mutations
                     var path = locator.ContentRootPath;
                     var image = await locator.ImageRepository.AddImageAsync(path, img.ImageData, img.Caption);
                     return image;
+                }
+            );
+
+            FieldAsync<CommentType>(
+                "createComment",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<CommentInputType>>() { Name = "comment" }
+                ),
+                resolve: async context =>
+                {
+                    var cmt = context.GetArgument<Comment>("comment");
+                    var comment = await locator.CommentRepository.CreateCommentAsync(cmt);
+                    return comment;
                 }
             );
         }

@@ -21,7 +21,8 @@ namespace BagelGram.Data.Repositories
             var newComment = new Comment
             {
                 ImageId = comment.ImageId,
-                UserId = comment.UserId,
+                UserId = 1,
+                // UserId = comment.UserId,
                 Text = comment.Text
             };
             await _context.AddAsync(newComment);

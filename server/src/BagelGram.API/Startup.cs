@@ -44,30 +44,38 @@ namespace BagelGram.API
 
             services.AddControllers();
             services.AddHttpContextAccessor();
+            // I don't like the ramifications of using singletons in DI but or
+            // at all but there doesn't seem to be any feasible alternative in
+            // .NET right now.
             services.AddSingleton<ContextServiceLocator>();
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
             services.AddSingleton<IDocumentWriter, DocumentWriter>();
-            // I don't like the ramifications of using singletons in DI but there doesn't seem
-            // to be any feasible alternative.
+
             services.AddSingleton<BagelQuery>();
+            services.AddSingleton<BagelMutation>();
+
+            // Users
             services.AddSingleton<UserQuery>();
-            services.AddSingleton<CommentQuery>();
-            services.AddSingleton<ImageQuery>();
-
-            services.AddSingleton<AppMutation>();
-
             services.AddSingleton<UserType>();
             services.AddSingleton<UserInputType>();
+
+            // Images
+            services.AddSingleton<ImageQuery>();
             services.AddSingleton<ImageType>();
             services.AddSingleton<ImageInputType>();
-            services.AddSingleton<CommentType>();
 
+            // Comments
+            services.AddSingleton<CommentQuery>();
+            services.AddSingleton<CommentType>();
+            services.AddSingleton<CommentInputType>();
+
+            // Repositories
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IImageRepository, ImageRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<ILikeRepository, LikeRepository>();
 
-            services.AddSingleton<ISchema, AppSchema>();
+            services.AddSingleton<ISchema, BagelSchema>();
 
             services
                 .AddGraphQL(_ =>

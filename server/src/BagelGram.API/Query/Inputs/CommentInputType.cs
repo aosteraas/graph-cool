@@ -7,10 +7,10 @@ namespace BagelGram.API.Query.Inputs
     {
         public CommentInputType()
         {
-            Name = "Comment";
+            Name = "CommentInput";
 
             Field(type: typeof(NonNullGraphType<IdGraphType>), "ImageId");
-            Field(type: typeof(StringGraphType), "Text");
+            Field(type: typeof(NonNullGraphType<StringGraphType>), "Text");
         }
     }
 }

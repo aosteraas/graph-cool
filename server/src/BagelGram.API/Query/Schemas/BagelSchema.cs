@@ -6,12 +6,12 @@ using BagelGram.API.Query.Mutations;
 
 namespace BagelGram.API.Query.Schemas
 {
-    public class AppSchema : Schema
+    public class BagelSchema : Schema
     {
-        public AppSchema(IServiceProvider provider) : base(provider)
+        public BagelSchema(IServiceProvider provider) : base(provider)
         {
             Query = provider.GetRequiredService<BagelQuery>();
-            Mutation = provider.GetRequiredService<AppMutation>();
+            Mutation = provider.GetRequiredService<BagelMutation>();
         }
     }
 }
