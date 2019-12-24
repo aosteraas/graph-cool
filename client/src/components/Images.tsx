@@ -13,8 +13,8 @@ export const Images = () => {
           <SquareImage src={`http://localhost:5000${image!.source}`} />
           <ImageActions>
             {/* <FontAwesomeIcon icon={fasHeart} /> */}
-            <FontAwesomeIcon icon={['far', 'heart']} />
-            <FontAwesomeIcon icon={['far', 'comment']} />
+            <FontAwesomeIcon icon={['fas', 'heart']} />
+            <FontAwesomeIcon icon={['fas', 'comment']} />
           </ImageActions>
           <div className="imageauthor">
             <strong>Bagel </strong>
