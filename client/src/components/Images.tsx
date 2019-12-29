@@ -10,7 +10,7 @@ export const Images = () => {
     <ImageColumn>
       {images.map((image, idx) => (
         <ImageItem key={idx}>
-          <SquareImage src={`http://localhost:5000${image!.source}`} />
+          <SquareImage src={`${image!.source}`} />
           <ImageActions>
             {/* <FontAwesomeIcon icon={fasHeart} /> */}
             <FontAwesomeIcon icon={['fas', 'heart']} />

@@ -27,15 +27,14 @@ export const Upload: React.FC = () => {
     const img = editor.current.getImageScaledToCanvas().toDataURL();
     return img;
   };
-  const [addImage_, { data: _data, error: _error }] = useCreateImageMutation();
-  const [addImage, { data, error }] = useMutation<{ addImage: Image }, { image: ImageInput }>(
-    ADD_IMAGE,
-    {
-      variables: { image: { imageData: onSave()!, caption } }
-    }
-  );
 
-  // addImage();
+  const [addImage, { data, error }] = useCreateImageMutation();
+
+  const handleUpload = () => {
+    const imageData = onSave()!;
+    const image = { imageData, caption };
+    addImage({ variables: { image } });
+  };
 
   return (
     <ImageColumn>
@@ -61,7 +60,7 @@ export const Upload: React.FC = () => {
         </div>
       </Controls>
       <Comment onChange={e => setCaption(e.target.value)} type="text" value={caption} />
-      <button onClick={() => addImage()}> Save </button>
+      <button onClick={() => handleUpload()}> Save </button>
     </ImageColumn>
   );
 };
