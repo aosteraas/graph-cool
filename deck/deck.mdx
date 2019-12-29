@@ -2,6 +2,7 @@ import { Image, Notes, Appear, Split, Horizontal } from "mdx-deck";
 import { future, highlight } from "@mdx-deck/themes";
 import { Squares } from "./components";
 import atom from './atom.gif'
+import jsonSchema from './download-schema-playground.png';
 export const themes = [future, highlight];
 
 # GraphQL
@@ -52,7 +53,7 @@ export const themes = [future, highlight];
 - Big and unusual
 - Has a lot of cool tools
 - Everything is a `POST` request
-- A new way of thinking
+- A new way of thinking and getting it done
 
 <Squares />
 
@@ -62,7 +63,7 @@ export const themes = [future, highlight];
 
 # Terminology TL:DR;
 
-- Query; how you get data
+- Query: how you get data
 - Mutation: how you create/update/etc data
 - Schema: describes what your API does
 - Field: data requested to/from the schema
@@ -75,12 +76,14 @@ There's a lot more but these are the most important.
 
 # Use Cases of GraphQL
 
-- As Middleware or an Aggregator
-- As a Proxy
+- Anywhere you'd use REST
 - Websockets with slightly less pain
-- Minimising request count and size
+- Minimising request count and size*
+- Nowhere you wouldn't have thought of
 
-<Notes>Nowhere you wouldn't have thought of</Notes>
+*Seriously awesome
+
+<Notes>Really shines as middleware/proxy in place of REST</Notes>
 
 ---
 
@@ -302,13 +305,17 @@ public class AppSchema : Schema
 
 ---
 
-# Now for the dirty parts
+<Appear>
 
-## AKA I wouldn't use .NET for <br/>this again in the near future
+<h1>Now for the dirty parts</h1>
 
-### The Defacto library lacks maturity<br/>and isn't fun with DI
+<h2>AKA I wouldn't use .NET for <br/>this again in the near future</h2>
 
-#### Why didn't I just use TypeScript?
+<h3>The Defacto library lacks maturity<br/>and isn't fun with DI</h3>
+
+<h4>Why didn't I just use TypeScript?</h4>
+
+</Appear>
 
 <Squares />
 
@@ -422,10 +429,14 @@ In short, Apollo is a great client, but suboptimal for<br/> code generation, and
 
 # GraphQL Code Generation
 
+<div style={{fontSize:`80%`}}>
+
 ```yaml
 overwrite: true
 schema: 'http://localhost:5000/graphql'
-documents: './src/queries**/*.{ts|tsx}'
+documents:
+  - './src/queries**/*.{ts|tsx}'
+  - './src/mutations**/*.{ts|tsx}'
 generates:
   src/generated/graphql.tsx:
     plugins:
@@ -437,10 +448,34 @@ generates:
       withComponent: false
       withHOC: false
       withHooks: true
-
 ```
 
+</div>
+
 <Squares />
+
+---
+
+# Write a Query
+
+<Squares />
+
+```jsx
+import { gql } from 'apollo-boost';
+
+export const QUERY_GET_IMAGES = gql`
+  query GetImages {
+    getImages {
+      id
+      source
+      caption
+      uploaded
+      totalLikes
+    }
+  }
+`;
+
+```
 
 ---
 
@@ -456,6 +491,8 @@ generates:
 
 # High Bang for Buck
 
+<div style={{fontSize:`80%`}}>
+
 ```jsx
 export function useGetImagesQuery(
   baseOptions?: ApolloReactHooks.QueryHookOptions<
@@ -470,6 +507,8 @@ export function useGetImagesQuery(
 }
 ```
 
+</div>
+
 <Squares />
 
 ---
@@ -477,7 +516,9 @@ export function useGetImagesQuery(
 # Apollo
 
 ```jsx
+// probably index.ts
 const client = new ApolloClient();
+
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Header />
@@ -495,7 +536,7 @@ ReactDOM.render(
 
 <div style={{fontSize:`80%`}}>
 
-```jsx
+```tsx
 export const Images = () => {
   const { data, error, loading } = useGetImagesQuery();
   const images = (data && data.getImages) || [];
@@ -503,7 +544,7 @@ export const Images = () => {
     <ImageColumn>
       {images.map((image, idx) => (
         <ImageItem key={idx}>
-          <SquareImage src={`http://localhost:5000${image!.source}`} />
+          <SquareImage src={`${image!.source}`} />
           <ImageActions>
             <FontAwesomeIcon icon={['far', 'heart']} />
           </ImageActions>
@@ -518,3 +559,240 @@ export const Images = () => {
 </div>
 
 <Squares />
+
+---
+
+# Mutations are Similar
+
+```tsx
+import { gql } from 'apollo-boost';
+
+export const ADD_IMAGE = gql`
+  mutation createImage($image: ImageInput!) {
+    createImage(image: $image) {
+      caption
+      id
+      source
+    }
+  }
+`;
+```
+
+<Squares />
+
+---
+
+# Using the generated Hook
+
+```jsx
+export const Upload: React.FC = () => {
+
+  const [addImage, { data, error }] = useCreateImageMutation();
+
+  const handleUpload = () => {
+    const imageData = onSave()!;
+    const image = { imageData, caption };
+
+    addImage({ variables: { image } });
+  };
+
+  return (
+    <button onClick={() => handleUpload()}> Save </button>
+  );
+}
+```
+
+<Squares />
+
+---
+
+# and then there was iOS
+
+## this is a mess but it's my fault
+
+### iOS is weird and I am not good at it
+
+#### And then there's SwiftUI
+
+##### Let's gloss over it wearing rose coloured glasses
+
+<Squares />
+
+---
+
+# iOS & Apollo
+
+- Install Apollo with Swift Package Manager, CocoaPods, or Carthage
+- Have Apollo installed globally
+- Maybe add the [GraphQL Highlighting plugin](https://github.com/apollographql/xcode-graphql) to XCode
+
+*Presuming you have apollo installed globally
+
+<Squares />
+
+---
+
+# Download your Schema
+
+You can do this via the Playground or GraphiQL
+
+<img src={jsonSchema} />
+
+Or via Apollo
+
+`apollo schema:download --endpoint=http://localhost:5000/graphql schema.json`
+
+Just make sure it's in the project's root unless there's a better place and you're happy<br/>to change whatever necessary (I wasn't)
+
+<Squares />
+
+---
+
+# Write a Query or Mutation
+
+This should look pretty familiar
+
+```graphql
+# ImageQuery.graphql
+query GetImages {
+  getImages {
+    id
+    source
+    caption
+    uploaded
+    totalLikes
+  }
+}
+```
+
+<Squares />
+
+---
+
+# Add a Code Generation<br/>script in Build Phases
+
+<div style={{fontSize: `50%` }}>
+
+```bash
+# Go to the build root and search up the chain to find the Derived Data Path where the source packages are checked out.
+DERIVED_DATA_CANDIDATE="${BUILD_ROOT}"
+
+while ! [ -d "${DERIVED_DATA_CANDIDATE}/SourcePackages" ]; do
+  if [ "${DERIVED_DATA_CANDIDATE}" = / ]; then
+    echo >&2 "error: Unable to locate SourcePackages directory from BUILD_ROOT: '${BUILD_ROOT}'"
+    exit 1
+  fi
+
+  DERIVED_DATA_CANDIDATE="$(dirname "${DERIVED_DATA_CANDIDATE}")"
+done
+
+# Grab a reference to the directory where scripts are checked out
+SCRIPT_PATH="${DERIVED_DATA_CANDIDATE}/SourcePackages/checkouts/apollo-ios/scripts"
+
+if [ -z "${SCRIPT_PATH}" ]; then
+    echo >&2 "error: Couldn't find the CLI script in your checked out SPM packages; make sure to add the framework to your project."
+    exit 1
+fi
+
+cd "${SRCROOT}/${TARGET_NAME}"
+"${SCRIPT_PATH}"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile="graphql.schema.json" API.swift
+
+```
+
+</div>
+
+<Squares />
+
+---
+
+# Build
+
+This will generate `API.swift`
+
+<div style={{fontSize:`80%`}}>
+
+
+```swift
+import Apollo
+import Foundation
+
+public final class GetImagesQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition =
+    """
+    query GetImages {
+      getImages {
+        __typename
+        id
+        source
+        caption
+        uploaded
+        totalLikes
+      }
+    }
+    """
+    // etc
+}
+```
+
+</div>
+
+<Squares />
+
+---
+
+# Create a Client
+
+This is what the Apollo docs suggest but you do you and yes<br/>there's a case for better abstraction when executing requests
+
+```swift
+class Network {
+  static let shared = Network()
+
+  private(set) lazy var apollo = ApolloClient(
+    url: URL(string: "http://localhost:8080/graphql")!
+  )
+}
+```
+
+<Squares />
+
+---
+
+# Perform an Operation
+
+<div style={{fontSize: `75%`}}>
+
+```swift
+class ImageData: ObservableObject {
+    @Published var data: [GetImagesQuery.Data.GetImage]
+
+    init() {
+        self.data = []
+        loadData()
+    }
+
+    func loadData() {
+        Server.shared.apollo.fetch(query: GetImagesQuery()) { result in
+            guard let data = try? result.get().data else { return }
+
+            if let imageData = data.getImages?.compactMap({$0}) {
+                self.data = imageData
+            }
+        }
+    }
+}
+```
+
+</div>
+
+<Squares />
+
+---
+
+
+# TODO
+
+2. iOS side of life
+3. TS server?
+4. example of gql vs rest

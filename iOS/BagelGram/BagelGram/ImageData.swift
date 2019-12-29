@@ -20,8 +20,8 @@ class ImageData: ObservableObject {
         Server.shared.apollo.fetch(query: GetImagesQuery()) { result in
             guard let data = try? result.get().data else { return }
 
-            if let stuff = data.getImages?.compactMap({$0}) {
-                self.data = stuff
+            if let imageData = data.getImages?.compactMap({$0}) {
+                self.data = imageData
             }
         }
     }
