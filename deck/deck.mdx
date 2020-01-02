@@ -3,6 +3,8 @@ import { future, highlight } from "@mdx-deck/themes";
 import { Squares } from "./components";
 import atom from './atom.gif'
 import jsonSchema from './download-schema-playground.png';
+import bagleGramiOS from './bagelgramios.png'
+import bwtm from './bwtm.gif';
 export const themes = [future, highlight];
 
 # GraphQL
@@ -20,7 +22,7 @@ export const themes = [future, highlight];
 <Appear>
   <h3>Roses are red</h3>
   <h3>Violets are blue</h3>
-  <h3>Yada yada yada</h3>
+  <h3>Third line // TODO</h3>
   <h3>GraphQL and You</h3>
 </Appear>
 <Squares />
@@ -790,9 +792,49 @@ class ImageData: ObservableObject {
 
 ---
 
+# half-baked victory
 
-# TODO
+<Horizontal>
 
-2. iOS side of life
-3. TS server?
-4. example of gql vs rest
+<img src={bagleGramiOS} />
+
+<div style={{textAlign:'left'}}>
+
+### Notes
+
+- I used SwiftUI which is new and I'm unfamiliar with it
+- SwiftUI is Apple's way or the highway (harder to customise)
+- The architecture is most likely not very good but I haven't touched iOS in years
+
+</div>
+
+</Horizontal>
+
+<Squares />
+
+---
+
+# In Summary
+
+- I wasn't sold on GraphQL until I made this presentation
+- Minimising number of requests and returned payload size a big win
+- It's nice to think about an API in data schema terms
+- Nobody uses REST as per spec anyway
+- There's still a great deal to GraphQL I don't know
+
+<Squares />
+
+---
+
+<Appear>
+<h1>The End</h1>
+<Image src={bwtm} />
+</Appear>
+
+<Squares />
+
+---
+
+# We need to talk about prisma
+
+<Squares />
