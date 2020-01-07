@@ -1,0 +1,38 @@
+# Write your query or mutation here
+mutation {
+  createUser(data: { name: "Jane" }) {
+    id
+  }
+}
+mutation {
+  createDraft(title: "GraphQL is great", authorId: "__USER_ID__") {
+    id
+    published
+    author {
+      id
+      name
+    }
+  }
+}
+mutation {
+  publish(id: "__POST_ID__") {
+    id
+    title
+    published
+  }
+}
+mutation {
+  deletePost(where: { id: "__POST_ID__" }) {
+    id
+  }
+}
+query {
+  feed {
+    id
+    title
+    author {
+      id
+      name
+    }
+  }
+}
